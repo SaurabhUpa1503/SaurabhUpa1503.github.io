@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saurabh Upadhyay | Strategy & Growth</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;600;700;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a1f3d;
+            --secondary: #1e4d7b;
+            --accent: #2196f3;
+            --accent-bright: #64b5f6;
+            --text: #0d1b2a;
+            --text-muted: #5a6f85;
+            --bg: #f8f9fa;
+            --card: #ffffff;
+            --border: #e1e8ed;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 50px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(33, 150, 243, 0.15) 0%, transparent 70%);
+            transform: rotate(-15deg);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -15%;
+            width: 70%;
+            height: 120%;
+            background: radial-gradient(circle, rgba(100, 181, 246, 0.1) 0%, transparent 70%);
+            transform: rotate(20deg);
+            animation: float 25s ease-in-out infinite reverse;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+        }
+
+        .hero-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent-bright);
+            margin-bottom: 20px;
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .hero-title {
+            font-size: 5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            animation: slideInLeft 0.8s ease-out 0.2s both;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+            opacity: 0.95;
+            max-width: 700px;
+            animation: slideInLeft 0.8s ease-out 0.4s both;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            opacity: 0.85;
+            max-width: 650px;
+            line-height: 1.7;
+            margin-bottom: 40px;
+            animation: slideInLeft 0.8s ease-out 0.6s both;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            animation: slideInLeft 0.8s ease-out 0.8s both;
+        }
+
+        .cta-button {
+            padding: 15px 35px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        .cta-primary {
+            background: var(--accent);
+            color: white;
+            border: 2px solid var(--accent);
+        }
+
+        .cta-primary:hover {
+            background: var(--accent-bright);
+            border-color: var(--accent-bright);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(33, 150, 243, 0.3);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .cta-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.8);
+            transform: translateY(-3px);
+        }
+
+        /* Section Base */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            margin-bottom: 60px;
+        }
+
+        .section-tag {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .section-description {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            line-height: 1.8;
+        }
+
+        /* About Section */
+        .about-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .about-content p {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            margin-bottom: 25px;
+            color: var(--text);
+        }
+
+        .about-highlights {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 50px;
+            border-radius: 16px;
+            color: white;
+            position: sticky;
+            top: 30px;
+        }
+
+        .highlight-item {
+            margin-bottom: 35px;
+        }
+
+        .highlight-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight-number {
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 10px;
+            color: var(--accent-bright);
+        }
+
+        .highlight-text {
+            font-size: 1.05rem;
+            opacity: 0.95;
+            line-height: 1.5;
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 50px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--accent) 0%, var(--accent-bright) 100%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 60px;
+            padding: 40px;
+            background: var(--card);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+            transform: translateX(10px);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -57px;
+            top: 50px;
+            width: 14px;
+            height: 14px;
+            background: var(--accent);
+            border: 4px solid var(--bg);
+            border-radius: 50%;
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .timeline-role {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .timeline-company {
+            font-size: 1.1rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .timeline-period {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            background: var(--bg);
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        .timeline-description {
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .timeline-achievements {
+            list-style: none;
+        }
+
+        .timeline-achievements li {
+            padding-left: 30px;
+            margin-bottom: 15px;
+            position: relative;
+            line-height: 1.7;
+            font-size: 0.98rem;
+        }
+
+        .timeline-achievements li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Skills Grid */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-box {
+            background: var(--card);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent);
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-box:hover::before {
+            transform: scaleY(1);
+        }
+
+        .skill-box:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            transform: translateY(-5px);
+        }
+
+        .skill-box h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 25px;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .skill-item {
+            padding: 10px 20px;
+            background: var(--bg);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text);
+            border: 1px solid var(--border);
+            transition: all 0.2s ease;
+        }
+
+        .skill-item:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        /* Achievements Grid */
+        .achievements-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .achievement-box {
+            background: var(--card);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .achievement-box:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            transform: translateY(-8px);
+            border-color: var(--accent);
+        }
+
+        .achievement-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .achievement-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .achievement-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Interests Section */
+        .interests-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .interest-card {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 50px 40px;
+            border-radius: 12px;
+            color: white;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .interest-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .interest-card:hover::before {
+            opacity: 1;
+        }
+
+        .interest-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .interest-emoji {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .interest-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .interest-text {
+            font-size: 1rem;
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: var(--card);
+            border-top: 1px solid var(--border);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .contact-info h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 25px;
+        }
+
+        .contact-info p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 25px 30px;
+            background: var(--bg);
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--text);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: translateX(10px);
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+        }
+
+        .contact-details {
+            flex: 1;
+        }
+
+        .contact-label {
+            font-size: 0.85rem;
+            font-family: 'IBM Plex Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+            margin-bottom: 5px;
+        }
+
+        .contact-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+            font-size: 0.95rem;
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+
+        /* Animations */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(-15deg); }
+            50% { transform: translateY(-30px) rotate(-15deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .hero-title {
+                font-size: 4rem;
+            }
+
+            .about-layout {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .about-highlights {
+                position: static;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 25px;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 80px 0;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .timeline {
+                padding-left: 30px;
+            }
+
+            .timeline-item::before {
+                left: -37px;
+            }
+
+            .interests-container {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+
+            .achievements-container {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+            }
+
+            .cta-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-label">Business Strategy Professional</div>
+                <h1 class="hero-title">Saurabh<br>Upadhyay</h1>
+                <div class="hero-subtitle">Transforming Data Into Strategy. Strategy Into Growth.</div>
+                <p class="hero-description">
+                    Five years of turning complex business problems into executable plans. Building frameworks that scale. Making decisions that stick. Currently sharpening my MBA toolkit at University of Edinburgh.
+                </p>
+                <div class="hero-cta">
+                    <a href="#contact" class="cta-button cta-primary">
+                        Get In Touch →
+                    </a>
+                    <a href="https://www.linkedin.com/in/saurabh-upadhyay-srbh" target="_blank" class="cta-button cta-secondary">
+                        View LinkedIn
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">Introduction</div>
+                <h2 class="section-title">Strategy Without the Jargon</h2>
+                <p class="section-description">
+                    Five years into business strategy, I've learned that good frameworks beat fancy buzzwords. Every time.
+                </p>
+            </div>
+            <div class="about-layout">
+                <div class="about-content">
+                    <p>I spent my first three years at Wipro working on autonomous vehicle projects, where I learned that complexity is inevitable but confusion is optional. Good documentation, clear communication, and structured problem-solving became second nature.</p>
+                    <p>Then I moved to Susamridh Nidhi Bank, where I led strategic growth initiatives that expanded financial inclusion across underserved regions. Drove 48% customer acquisition growth in two quarters by building frameworks that executives actually used instead of filing away. Applied predictive analytics to enable 30% revenue growth. Made numbers tell compelling stories.</p>
+                    <p>Along the way, I picked up Power BI, advanced Excel wizardry, Python automation, and an engineering degree from VIT with an 8.94 GPA. Got certified by Microsoft (twice), Google, and various platforms that prove I can walk the talk.</p>
+                    <p>Currently pursuing my MBA at University of Edinburgh Business School, where I'm questioning everything I thought I knew about business while preparing for roles in strategy consulting and product management.</p>
+                    <p>When I'm not dissecting case studies or optimizing processes, you'll find me trekking through hills (best ideas happen at altitude), exploring cities on foot (architecture tells better stories than spreadsheets), or journaling reflective thoughts (writing clarifies thinking).</p>
+                </div>
+                <div class="about-highlights">
+                    <div class="highlight-item">
+                        <div class="highlight-number">5+</div>
+                        <div class="highlight-text">Years driving strategy and growth across NBFC and tech sectors</div>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="highlight-number">48%</div>
+                        <div class="highlight-text">Customer acquisition increase within 2 quarters at Susamridh</div>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="highlight-number">30%</div>
+                        <div class="highlight-text">Revenue growth enabled through predictive analytics</div>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="highlight-number">50+</div>
+                        <div class="highlight-text">Enterprise client demos led during Wipro tenure</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">Professional Journey</div>
+                <h2 class="section-title">Where I've Built Things</h2>
+                <p class="section-description">
+                    Strategy without execution is wishful thinking. Execution without strategy is chaos. I've learned to balance both.
+                </p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div>
+                            <div class="timeline-role">Business Strategy Manager</div>
+                            <div class="timeline-company">Susamridh Nidhi Bank</div>
+                        </div>
+                        <div class="timeline-period">Nov 2022 – Feb 2025</div>
+                    </div>
+                    <div class="timeline-description">
+                        Led strategic growth initiatives for a government-backed NBFC. Turned financial inclusion from corporate buzzword into measurable reality across underserved regions.
+                    </div>
+                    <ul class="timeline-achievements">
+                        <li>Drove 48% customer acquisition increase within 2 quarters through comprehensive project planning aligned with financial goals. Spoiler: having a plan actually helps.</li>
+                        <li>Led cross-functional marketing and analytics team, implementing process automation that enhanced reporting efficiency by 20%. Less time on reports meant more time doing actual strategy.</li>
+                        <li>Applied data analytics and trend forecasting to design predictive collection models, enabling 30% revenue growth. Made numbers dance to our tune.</li>
+                        <li>Synthesized financial and operational data into actionable insights that shaped strategic decisions and policy implementation. Translated data speak into executive language.</li>
+                        <li>Created PowerPoint decks and dashboards that communicated performance metrics to stakeholders. Made data visualization an art form.</li>
+                        <li>Facilitated financial intelligence workshops that improved cross-team comprehension and reduced cash conversion cycle by 35%. Taught finance without inducing sleep.</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div>
+                            <div class="timeline-role">Project Engineer</div>
+                            <div class="timeline-company">Wipro Ltd., Bangalore</div>
+                        </div>
+                        <div class="timeline-period">Jul 2019 – Oct 2022</div>
+                    </div>
+                    <div class="timeline-description">
+                        Managed multiple R&D projects for Wipro's flagship Software-Defined Vehicle and WIPOD Autonomous Vehicle programs. Worked on technology slowly turning science fiction into commercial reality.
+                    </div>
+                    <ul class="timeline-achievements">
+                        <li>Structured and analyzed complex project requirements under agile frameworks, ensuring on-time delivery for 50+ enterprise clients. Agile wasn't just corporate speak here.</li>
+                        <li>Led technical demos and stakeholder reviews, learning to explain autonomous vehicle tech without sounding like a science fiction writer.</li>
+                        <li>Enhanced velocity dynamics models and implemented multi-OS integration (QNX), improving SDV data modeling efficiency by 25%. Made cars smarter, one algorithm at a time.</li>
+                        <li>Optimized sensor modules through logical problem-solving, improving vehicle response times by 30%. Milliseconds matter when you're autonomous.</li>
+                        <li>Prepared technical documentation and analytical reports that global teams actually read and understood. Technical writing that didn't collect digital dust.</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div>
+                            <div class="timeline-role">Technical Intern</div>
+                            <div class="timeline-company">Hindustan Aeronautics Limited</div>
+                        </div>
+                        <div class="timeline-period">Jun 2018 – Aug 2018</div>
+                    </div>
+                    <ul class="timeline-achievements">
+                        <li>Analyzed business domains across HAL, focusing on production and inventory management in aerospace manufacturing.</li>
+                        <li>Created performance index reports for various divisions. Learned that aerospace is a completely different beast.</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div>
+                            <div class="timeline-role">Network Operations Intern</div>
+                            <div class="timeline-company">Idea Cellular, Lucknow</div>
+                        </div>
+                        <div class="timeline-period">May 2017 – Aug 2017</div>
+                    </div>
+                    <ul class="timeline-achievements">
+                        <li>Generated reports and analyzed BTS stations, resulting in zone mapping with 30% enhanced monitoring.</li>
+                        <li>Created network performance reports and debugged modules to reduce call latency by 10%. Because dropped calls are genuinely annoying.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">Capabilities</div>
+                <h2 class="section-title">Technical & Strategic Arsenal</h2>
+                <p class="section-description">
+                    Tools I've mastered. Frameworks I've deployed. Buzzwords I can actually back up with results.
+                </p>
+            </div>
+            <div class="skills-container">
+                <div class="skill-box">
+                    <h3>Technical Skills</h3>
+                    <div class="skill-list">
+                        <span class="skill-item">Power BI</span>
+                        <span class="skill-item">Advanced Excel</span>
+                        <span class="skill-item">Python</span>
+                        <span class="skill-item">MySQL</span>
+                        <span class="skill-item">Linux</span>
+                        <span class="skill-item">ROS</span>
+                        <span class="skill-item">Data Modeling</span>
+                        <span class="skill-item">Power Automate</span>
+                    </div>
+                </div>
+
+                <div class="skill-box">
+                    <h3>Strategic Expertise</h3>
+                    <div class="skill-list">
+                        <span class="skill-item">Business Strategy</span>
+                        <span class="skill-item">Growth Marketing</span>
+                        <span class="skill-item">Financial Modeling</span>
+                        <span class="skill-item">Process Optimization</span>
+                        <span class="skill-item">Market Research</span>
+                        <span class="skill-item">Data Analytics</span>
+                    </div>
+                </div>
+
+                <div class="skill-box">
+                    <h3>Core Strengths</h3>
+                    <div class="skill-list">
+                        <span class="skill-item">Project Management</span>
+                        <span class="skill-item">Analytical Thinking</span>
+                        <span class="skill-item">Strategic Planning</span>
+                        <span class="skill-item">Team Leadership</span>
+                        <span class="skill-item">Stakeholder Engagement</span>
+                        <span class="skill-item">Communication</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="achievements">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">Credentials</div>
+                <h2 class="section-title">Achievements & Education</h2>
+                <p class="section-description">
+                    Certificates matter. What you build with them matters more.
+                </p>
+            </div>
+            <div class="achievements-container">
+                <div class="achievement-box">
+                    <div class="achievement-icon">🎓</div>
+                    <div class="achievement-title">MBA Candidate</div>
+                    <div class="achievement-subtitle">University of Edinburgh Business School (2025-2026)</div>
+                </div>
+
+                <div class="achievement-box">
+                    <div class="achievement-icon">🔧</div>
+                    <div class="achievement-title">B.Tech. Electronics & Communication</div>
+                    <div class="achievement-subtitle">Vellore Institute of Technology | GPA: 8.94/10</div>
+                </div>
+
+                <div class="achievement-box">
+                    <div class="achievement-icon">📊</div>
+                    <div class="achievement-title">Power BI Data Analyst</div>
+                    <div class="achievement-subtitle">Microsoft Certified Associate</div>
+                </div>
+
+                <div class="achievement-box">
+                    <div class="achievement-icon">☁️</div>
+                    <div class="achievement-title">Azure Fundamentals</div>
+                    <div class="achievement-subtitle">Microsoft Certified</div>
+                </div>
+
+                <div class="achievement-box">
+                    <div class="achievement-icon">📈</div>
+                    <div class="achievement-title">Google Analytics</div>
+                    <div class="achievement-subtitle">Certification ID: 169352282</div>
+                </div>
+
+                <div class="achievement-box">
+                    <div class="achievement-icon">📉</div>
+                    <div class="achievement-title">Advanced Excel for Analytics</div>
+                    <div class="achievement-subtitle">Udemy Certified</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="interests">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">Beyond Work</div>
+                <h2 class="section-title">Life Outside the Office</h2>
+                <p class="section-description">
+                    What I do when not optimizing conversion funnels or building financial models.
+                </p>
+            </div>
+            <div class="interests-container">
+                <div class="interest-card">
+                    <div class="interest-emoji">🥾</div>
+                    <div class="interest-title">Trekking</div>
+                    <div class="interest-text">Finding clarity at altitude. Some of my best ideas happen on mountain trails, probably because there's no Wi-Fi to distract me.</div>
+                </div>
+
+                <div class="interest-card">
+                    <div class="interest-emoji">🏙️</div>
+                    <div class="interest-title">Urban Exploration</div>
+                    <div class="interest-text">Walking through cities to understand their rhythm. Architecture tells stories that spreadsheets sometimes miss.</div>
+                </div>
+
+                <div class="interest-card">
+                    <div class="interest-emoji">✍️</div>
+                    <div class="interest-title">Reflective Writing</div>
+                    <div class="interest-text">Journaling thoughts, observations, and occasional existential crises. Writing clarifies thinking.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h2>Let's Connect</h2>
+                    <p>Whether you want to discuss strategy frameworks, swap trekking recommendations, or debate why most business models are just common sense dressed in consultant speak, I'm all ears.</p>
+                    <p>Open to opportunities in strategy consulting, product management, and roles where analytical thinking meets business execution.</p>
+                </div>
+                <div class="contact-methods">
+                    <a href="mailto:saurabh.upadhyay1503@gmail.com" class="contact-link">
+                        <div class="contact-icon">📧</div>
+                        <div class="contact-details">
+                            <div class="contact-label">Email</div>
+                            <div class="contact-value">saurabh.upadhyay1503@gmail.com</div>
+                        </div>
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/saurabh-upadhyay-srbh" target="_blank" class="contact-link">
+                        <div class="contact-icon">💼</div>
+                        <div class="contact-details">
+                            <div class="contact-label">LinkedIn</div>
+                            <div class="contact-value">Connect professionally</div>
+                        </div>
+                    </a>
+
+                    <a href="https://github.com/SaurabhUpa1503" target="_blank" class="contact-link">
+                        <div class="contact-icon">👨‍💻</div>
+                        <div class="contact-details">
+                            <div class="contact-label">GitHub</div>
+                            <div class="contact-value">View projects</div>
+                        </div>
+                    </a>
+
+                    <a href="tel:+447818982971" class="contact-link">
+                        <div class="contact-icon">📱</div>
+                        <div class="contact-details">
+                            <div class="contact-label">Phone</div>
+                            <div class="contact-value">+44 7818982971</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Saurabh Upadhyay. Built with strategic intent, not a template.</p>
+        </div>
+    </footer>
+</body>
+</html>
