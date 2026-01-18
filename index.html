@@ -210,6 +210,7 @@
             box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
         }
 
+        /* Creative Image Styling */
         .hero-image-container {
             position: relative;
             opacity: 0;
@@ -218,22 +219,108 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            perspective: 1000px;
+        }
+
+        .image-frame {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .image-frame::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: 20px;
+            bottom: 20px;
+            border: 3px solid rgba(100, 181, 246, 0.3);
+            border-radius: 16px;
+            z-index: -1;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .image-frame::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: -20px;
+            bottom: -20px;
+            background: linear-gradient(135deg, rgba(33, 150, 243, 0.2) 0%, rgba(100, 181, 246, 0.1) 100%);
+            border-radius: 16px;
+            z-index: -2;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .image-frame:hover::before {
+            top: -25px;
+            left: -25px;
+            right: 25px;
+            bottom: 25px;
+            border-color: rgba(100, 181, 246, 0.6);
+        }
+
+        .image-frame:hover::after {
+            top: 25px;
+            left: 25px;
+            right: -25px;
+            bottom: -25px;
         }
 
         .hero-image {
             width: 100%;
-            max-width: 450px;
             height: auto;
             display: block;
             border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            border: 4px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
             object-fit: cover;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            z-index: 1;
         }
 
         .hero-image:hover {
-            transform: scale(1.05);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 
+                0 30px 80px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+        }
+
+        .image-accent-dot {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--accent-bright);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(100, 181, 246, 0.6);
+            z-index: 2;
+        }
+
+        .dot-1 {
+            top: 30px;
+            right: 30px;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .dot-2 {
+            bottom: 30px;
+            left: 30px;
+            animation: pulse 3s ease-in-out 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 0.7;
+            }
         }
 
         /* Fade in on scroll elements */
@@ -1018,11 +1105,6 @@
             transition: color 0.3s ease;
         }
 
-        .form-group input:focus + label,
-        .form-group textarea:focus + label {
-            color: var(--accent);
-        }
-
         .form-group input,
         .form-group textarea {
             width: 100%;
@@ -1140,7 +1222,7 @@
                 gap: 50px;
             }
 
-            .hero-image {
+            .image-frame {
                 max-width: 350px;
                 margin: 0 auto;
             }
@@ -1218,6 +1300,11 @@
             .contact-form-container {
                 padding: 30px;
             }
+
+            .image-frame::before,
+            .image-frame::after {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -1244,7 +1331,11 @@
                     </div>
                 </div>
                 <div class="hero-image-container">
-                    <img src="./profile-photo.jpg" alt="Saurabh Upadhyay" class="hero-image">
+                    <div class="image-frame">
+                        <img src="./profile-photo.jpg" alt="Saurabh Upadhyay" class="hero-image">
+                        <div class="image-accent-dot dot-1"></div>
+                        <div class="image-accent-dot dot-2"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1256,16 +1347,16 @@
                 <div class="section-tag">Introduction</div>
                 <h2 class="section-title">Strategy Without the Jargon</h2>
                 <p class="section-description">
-                    Five years into business strategy and project management, I've learned that good frameworks beat fancy buzzwords. Every time.
+                    Five years into business strategy and project management, I have learned that good frameworks beat fancy buzzwords. Every time.
                 </p>
             </div>
             <div class="about-layout">
                 <div class="about-content fade-in-left">
-                    <p>I spent my first three years at Wipro orchestrating complex R&D projects for autonomous vehicle programs, where I learned that clarity beats complexity. Led technical demos for 50+ enterprise clients, managed cross-functional stakeholders, and discovered that good documentation saves careers.</p>
-                    <p>Then I moved to Susamridh Nidhi Bank as Business Strategy Manager, where I led growth initiatives that expanded financial inclusion across underserved regions. Drove 48% customer acquisition in two quarters. Applied predictive analytics to enable 30% revenue growth. Reduced cash conversion cycle by 35%. Made numbers tell compelling stories that executives actually acted on.</p>
-                    <p>Currently pursuing my MBA at University of Edinburgh Business School, where I'm consulting for real clients on real problems. Helped Streets Ahead (disability support NGO) secure potential £50,000 in funding through data-driven impact measurement. Designed market entry strategies for Predictiva targeting GCC and MENA markets. Advised NatWest Group on digital asset opportunities in the UK market.</p>
-                    <p>Certified by Microsoft (Power BI, Azure), Google (Analytics), and battle-tested by actual project delivery. I code when Excel refuses to cooperate, visualize data that tells stories, and build frameworks that scale.</p>
-                    <p>When I'm not dissecting case studies or optimizing processes, you'll find me trekking through hills, exploring cities on foot, or journaling reflective thoughts. Best ideas happen away from screens.</p>
+                    <p>I spent my first three years at Wipro orchestrating complex research and development projects for autonomous vehicle programs, where I learned that clarity beats complexity. Leading technical demonstrations for fifty enterprise clients and managing cross-functional stakeholders taught me that good documentation saves careers while poor communication destroys them.</p>
+                    <p>Then I moved to Susamridh Nidhi Bank as Business Strategy Manager, where I led growth initiatives that expanded financial inclusion across underserved regions. Driving forty-eight percent customer acquisition in two quarters while applying predictive analytics to enable thirty percent revenue growth demonstrated that numbers can tell compelling stories when properly framed. Reducing the cash conversion cycle by thirty-five percent proved that executives actually act on well-presented data.</p>
+                    <p>Currently pursuing my MBA at University of Edinburgh Business School, I am consulting for real clients on real problems. Helping Streets Ahead secure potential funding of fifty thousand pounds through data-driven impact measurement shows that proper frameworks create tangible value. Designing market entry strategies for Predictiva targeting Gulf Cooperation Council and Middle East North Africa markets while advising NatWest Group on digital asset opportunities demonstrates that strategic thinking translates across industries.</p>
+                    <p>Certified by Microsoft for Power BI and Azure, and by Google for Analytics, I am battle-tested by actual project delivery. I code when Excel refuses to cooperate, visualize data that tells stories, and build frameworks that scale beyond their initial scope.</p>
+                    <p>When I am not dissecting case studies or optimizing processes, you will find me trekking through hills, exploring cities on foot, or journaling reflective thoughts. The best ideas happen away from screens.</p>
                 </div>
                 <div class="about-highlights fade-in-right">
                     <div class="highlight-item">
@@ -1295,7 +1386,7 @@
                 <div class="section-tag">MBA Consulting Work</div>
                 <h2 class="section-title">Where Strategy Meets Reality</h2>
                 <p class="section-description">
-                    Real clients. Real challenges. Real impact. Consulting projects that went beyond PowerPoint decks.
+                    Real clients facing real challenges producing real impact. Consulting projects that went beyond PowerPoint decks.
                 </p>
             </div>
             <div class="projects-grid">
@@ -1308,13 +1399,13 @@
                         <div class="project-date">2025</div>
                     </div>
                     <div class="project-description">
-                        Consulted NatWest Group on major market shift dynamics towards digital assets like cryptocurrency. Analyzed market potential and competitive threats of strategic positioning within the UK digital assets sector.
+                        Consulted NatWest Group on major market shift dynamics towards digital assets like cryptocurrency. Analyzed market potential and competitive threats of strategic positioning within the United Kingdom digital assets sector.
                     </div>
                     <ul class="project-achievements">
-                        <li>Conducted comprehensive market analysis of UK digital assets landscape, evaluating regulatory environment, competitive positioning, and emerging opportunities in cryptocurrency and blockchain technologies</li>
+                        <li>Conducted comprehensive market analysis of United Kingdom digital assets landscape, evaluating regulatory environment, competitive positioning, and emerging opportunities in cryptocurrency and blockchain technologies</li>
                         <li>Assessed strategic implications of market entry timing, identifying critical success factors and potential barriers to adoption within traditional banking infrastructure</li>
                         <li>Delivered evidence-based recommendations for strategic positioning, including phased implementation roadmap balancing innovation opportunities against regulatory compliance and risk management</li>
-                        <li>Provided actionable framework for evaluating build vs. partnership strategies in digital asset custody, trading, and advisory services</li>
+                        <li>Provided actionable framework for evaluating build versus partnership strategies in digital asset custody, trading, and advisory services</li>
                     </ul>
                 </div>
 
@@ -1330,10 +1421,10 @@
                         Led strategic consulting engagement for disability support organization in Edinburgh, focusing on rebranding strategy and measurable impact demonstration for funding applications.
                     </div>
                     <ul class="project-achievements">
-                        <li>Executed comprehensive market research across 12 competitor organizations and interviewed 8 key stakeholders to understand positioning gaps and donor expectations</li>
-                        <li>Formulated strategic rebranding roadmap with 15 defined milestones projected to increase donor engagement by 25% through clearer mission articulation and impact storytelling</li>
-                        <li>Architected data-driven impact measurement framework analyzing 200+ client touchpoints, quantifying service delivery outcomes and social value creation</li>
-                        <li>Enabled organization to pursue 3 new grant applications worth estimated £50,000 in potential funding through evidence-based impact demonstration and strategic positioning</li>
+                        <li>Executed comprehensive market research across twelve competitor organizations and interviewed eight key stakeholders to understand positioning gaps and donor expectations</li>
+                        <li>Formulated strategic rebranding roadmap with fifteen defined milestones projected to increase donor engagement by twenty-five percent through clearer mission articulation and impact storytelling</li>
+                        <li>Architected data-driven impact measurement framework analyzing over two hundred client touchpoints, quantifying service delivery outcomes and social value creation</li>
+                        <li>Enabled organization to pursue three new grant applications worth an estimated fifty thousand pounds in potential funding through evidence-based impact demonstration and strategic positioning</li>
                     </ul>
                 </div>
 
@@ -1346,13 +1437,13 @@
                         <div class="project-date">2025</div>
                     </div>
                     <div class="project-description">
-                        Collaborated with C-suite executives to devise comprehensive go-to-market strategy for fintech expansion into Gulf Cooperation Council and Middle East North Africa markets.
+                        Collaborated with executive leadership to devise comprehensive go-to-market strategy for fintech expansion into Gulf Cooperation Council and Middle East North Africa markets.
                     </div>
                     <ul class="project-achievements">
-                        <li>Collaborated with 4 senior executives over two-month engagement to analyze market entry opportunities across 6 GCC and MENA markets with combined addressable market of £2.5 million</li>
+                        <li>Collaborated with four senior executives over two-month engagement to analyze market entry opportunities across six Gulf Cooperation Council and Middle East North Africa markets with combined addressable market of two point five million pounds</li>
                         <li>Conducted competitive landscape analysis, regulatory environment assessment, and customer segmentation to identify high-potential market entry sequences</li>
-                        <li>Constructed comprehensive risk mitigation plan identifying 18 potential risks with corresponding mitigation strategies across regulatory, operational, and market acceptance dimensions</li>
-                        <li>Delivered lean-budget marketing framework reducing projected customer acquisition cost by 30% through targeted digital channels and strategic partnership models</li>
+                        <li>Constructed comprehensive risk mitigation plan identifying eighteen potential risks with corresponding mitigation strategies across regulatory, operational, and market acceptance dimensions</li>
+                        <li>Delivered lean-budget marketing framework reducing projected customer acquisition cost by thirty percent through targeted digital channels and strategic partnership models</li>
                     </ul>
                 </div>
             </div>
@@ -1363,9 +1454,9 @@
         <div class="container">
             <div class="section-header fade-in">
                 <div class="section-tag">Professional Journey</div>
-                <h2 class="section-title">Where I've Built Things</h2>
+                <h2 class="section-title">Where I Built Things That Matter</h2>
                 <p class="section-description">
-                    Strategy without execution is wishful thinking. Execution without strategy is chaos. I've learned to balance both.
+                    Strategy without execution is wishful thinking. Execution without strategy is chaos. I learned to balance both through years of actual delivery.
                 </p>
             </div>
             <div class="timeline">
@@ -1381,10 +1472,10 @@
                         Spearheaded strategic growth initiatives for government-backed financial institution. Turned financial inclusion from corporate buzzword into measurable reality across underserved regions through structured project delivery.
                     </div>
                     <ul class="timeline-achievements">
-                        <li>Delivered 48% customer acquisition growth within two quarters through structured market segmentation, timeline management, and coordinated channel deployment across multiple regions</li>
-                        <li>Directed cross-functional team of eight members across marketing and analytics, establishing RACI matrices and accountability structures that improved reporting efficiency by 20%</li>
-                        <li>Built predictive collection models enabling 30% revenue growth through proactive risk identification and data-driven decision frameworks</li>
-                        <li>Facilitated financial intelligence workshops that improved cross-team comprehension and reduced cash conversion cycle by 35%. Taught finance without inducing sleep.</li>
+                        <li>Delivered forty-eight percent customer acquisition growth within two quarters through structured market segmentation, timeline management, and coordinated channel deployment across multiple regions</li>
+                        <li>Directed cross-functional team of eight members across marketing and analytics, establishing responsibility assignment matrices and accountability structures that improved reporting efficiency by twenty percent</li>
+                        <li>Built predictive collection models enabling thirty percent revenue growth through proactive risk identification and data-driven decision frameworks</li>
+                        <li>Facilitated financial intelligence workshops that improved cross-team comprehension and reduced cash conversion cycle by thirty-five percent, teaching finance concepts without inducing sleep</li>
                         <li>Synthesized financial and operational data into executive dashboards and status reports, empowering senior leadership to make informed strategic decisions</li>
                     </ul>
                 </div>
@@ -1398,14 +1489,14 @@
                         <div class="timeline-period">Jul 2019 – Oct 2022</div>
                     </div>
                     <div class="timeline-description">
-                        Orchestrated complex R&D projects for Wipro's flagship Software-Defined Vehicle and WIPOD Autonomous Vehicle programs. Managed requirements, stakeholders, and deliverables for technology slowly turning science fiction into commercial reality.
+                        Orchestrated complex research and development projects for Wipro flagship Software-Defined Vehicle and WIPOD Autonomous Vehicle programs. Managed requirements, stakeholders, and deliverables for technology slowly turning science fiction into commercial reality.
                     </div>
                     <ul class="timeline-achievements">
                         <li>Orchestrated complex requirements for autonomous vehicle programs, translating technical specifications into actionable project plans, client presentations, and stakeholder communications</li>
-                        <li>Engaged with 50+ enterprise clients through technical demonstrations and stakeholder reviews, achieving 100% project adoption rate across global accounts</li>
-                        <li>Streamlined data modeling processes and project workflows, boosting operational efficiency by 25% and accelerating delivery timelines for global stakeholders</li>
-                        <li>Enhanced velocity dynamics models and implemented multi-OS integration (QNX). Made cars smarter, one algorithm at a time.</li>
-                        <li>Prepared technical documentation and analytical reports that global teams actually read and understood. Technical writing that didn't collect digital dust.</li>
+                        <li>Engaged with over fifty enterprise clients through technical demonstrations and stakeholder reviews, achieving one hundred percent project adoption rate across global accounts</li>
+                        <li>Streamlined data modeling processes and project workflows, boosting operational efficiency by twenty-five percent and accelerating delivery timelines for global stakeholders</li>
+                        <li>Enhanced velocity dynamics models and implemented multi-operating system integration using QNX platform, making autonomous vehicles incrementally smarter through systematic improvements</li>
+                        <li>Prepared technical documentation and analytical reports that global teams actually read and understood, creating technical writing that avoided collecting digital dust</li>
                     </ul>
                 </div>
 
@@ -1413,13 +1504,35 @@
                     <div class="timeline-header">
                         <div>
                             <div class="timeline-role">Technical Intern</div>
-                            <div class="timeline-company">Hindustan Aeronautics Limited</div>
+                            <div class="timeline-company">Hindustan Aeronautics Limited, Lucknow</div>
                         </div>
                         <div class="timeline-period">Jun 2018 – Aug 2018</div>
                     </div>
+                    <div class="timeline-description">
+                        Analyzed business domains across Hindustan Aeronautics Limited with focus on production and inventory management within aerospace manufacturing context.
+                    </div>
                     <ul class="timeline-achievements">
-                        <li>Assessed production and inventory management processes across aerospace manufacturing divisions</li>
-                        <li>Generated performance index reports for leadership decision-making. Learned that aerospace is a completely different beast.</li>
+                        <li>Assessed production workflows and inventory management processes across multiple aerospace manufacturing divisions, gaining exposure to complex supply chain dynamics</li>
+                        <li>Generated performance index reports for various organizational divisions to support leadership decision-making, learning that aerospace manufacturing operates at entirely different complexity levels than consumer industries</li>
+                        <li>Gained foundational understanding of aerospace manufacturing workflows, quality control standards, and regulatory compliance requirements that shape the industry</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-header">
+                        <div>
+                            <div class="timeline-role">Network Operations Intern</div>
+                            <div class="timeline-company">Idea Cellular (now Vodafone Idea), Lucknow</div>
+                        </div>
+                        <div class="timeline-period">May 2017 – Aug 2017</div>
+                    </div>
+                    <div class="timeline-description">
+                        Contributed to network operations and performance optimization initiatives within telecommunications infrastructure management.
+                    </div>
+                    <ul class="timeline-achievements">
+                        <li>Generated comprehensive reports and analyzed base transceiver station performance data, resulting in zone mapping improvements that enhanced network monitoring capabilities by thirty percent</li>
+                        <li>Created network performance assessment reports and debugged network modules to reduce call latency by ten percent, improving service quality metrics across monitored zones</li>
+                        <li>Developed practical understanding of telecommunications infrastructure operations, network optimization methodologies, and performance monitoring systems</li>
                     </ul>
                 </div>
             </div>
@@ -1432,7 +1545,7 @@
                 <div class="section-tag">Capabilities</div>
                 <h2 class="section-title">Technical & Strategic Arsenal</h2>
                 <p class="section-description">
-                    Tools I've mastered. Frameworks I've deployed. Buzzwords I can actually back up with results.
+                    Tools mastered through actual use. Frameworks deployed in real projects. Buzzwords backed by demonstrated results.
                 </p>
             </div>
             <div class="skills-container">
@@ -1484,7 +1597,7 @@
                 <div class="section-tag">Credentials</div>
                 <h2 class="section-title">Achievements & Education</h2>
                 <p class="section-description">
-                    Certificates matter. What you build with them matters more.
+                    Certificates that matter. What you build with them matters more.
                 </p>
             </div>
             <div class="achievements-container">
@@ -1527,14 +1640,14 @@
                 <div class="section-tag">Beyond Work</div>
                 <h2 class="section-title">Life Outside the Office</h2>
                 <p class="section-description">
-                    What I do when not optimizing conversion funnels or building project plans.
+                    Activities pursued when not optimizing conversion funnels or building project plans.
                 </p>
             </div>
             <div class="interests-container">
                 <div class="interest-card fade-in">
                     <div class="interest-emoji">🥾</div>
                     <div class="interest-title">Trekking</div>
-                    <div class="interest-text">Finding clarity at altitude. Some of my best ideas happen on mountain trails, probably because there's no Wi-Fi to distract me.</div>
+                    <div class="interest-text">Finding clarity at altitude. Best ideas happen on mountain trails, probably because no wireless connectivity exists to create distractions.</div>
                 </div>
 
                 <div class="interest-card fade-in">
@@ -1546,7 +1659,7 @@
                 <div class="interest-card fade-in">
                     <div class="interest-emoji">✍️</div>
                     <div class="interest-title">Reflective Writing</div>
-                    <div class="interest-text">Journaling thoughts, observations, and occasional existential crises. Writing clarifies thinking.</div>
+                    <div class="interest-text">Journaling thoughts, observations, and occasional existential questions. Writing clarifies thinking in ways conversation cannot.</div>
                 </div>
             </div>
         </div>
@@ -1558,7 +1671,7 @@
                 <div>
                     <div class="contact-info fade-in-left">
                         <h2>Let's Connect</h2>
-                        <p>Whether you want to discuss strategy frameworks, explore consulting opportunities, or debate why most business models are just common sense dressed in consultant speak, I'm all ears.</p>
+                        <p>Whether you want to discuss strategy frameworks, explore consulting opportunities, or debate why most business models represent common sense dressed in consultant terminology, I am available for conversation.</p>
                         <p>Open to opportunities in strategy consulting, product management, and project leadership roles where analytical thinking meets business execution.</p>
                     </div>
                     <div class="contact-methods">
