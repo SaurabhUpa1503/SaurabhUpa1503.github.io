@@ -332,14 +332,14 @@
             height: 100vh;
             object-fit: cover;
             border-radius: 50%;
-            /* CORRECTED: Flat edge on right, curve toward center */
-            clip-path: polygon(0% 0%, 50% 0%, 50% 100%, 0% 100%);
+            /* Flat edge on right (at screen edge), curve toward center (left side showing) */
+            clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%);
             filter: brightness(1.08) contrast(1.12);
             transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 
-                60px 0 120px rgba(0, 136, 170, 0.45),
-                100px 0 180px rgba(0, 180, 216, 0.35),
-                140px 0 240px rgba(134, 188, 37, 0.2);
+                -60px 0 120px rgba(0, 136, 170, 0.45),
+                -100px 0 180px rgba(0, 180, 216, 0.35),
+                -140px 0 240px rgba(134, 188, 37, 0.2);
         }
 
         .hero-image:hover {
@@ -356,13 +356,13 @@
             height: 100vh;
             border-radius: 50%;
             border: 3px solid rgba(134, 188, 37, 0.5);
-            /* CORRECTED: Same clip path as image */
-            clip-path: polygon(0% 0%, 50% 0%, 50% 100%, 0% 100%);
+            /* Same clip path as image */
+            clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%);
             opacity: 0.7;
             animation: pulseAccent 5s ease-in-out infinite;
             box-shadow: 
-                inset 30px 0 60px rgba(0, 136, 170, 0.3),
-                40px 0 80px rgba(0, 180, 216, 0.2);
+                inset -30px 0 60px rgba(0, 136, 170, 0.3),
+                -40px 0 80px rgba(0, 180, 216, 0.2);
         }
 
         @keyframes pulseAccent {
@@ -1650,11 +1650,11 @@
         </p>
         <div class="contact-grid">
             <div class="contact-methods">
-                <a href="mailto:saurabh.upadhyay1503@gmail.com" class="contact-link">
+                <a href="/cdn-cgi/l/email-protection#1c6f7d696e7d7e7432696c7d7874657d652d292c2f5c7b717d7570327f7371" class="contact-link">
                     <div class="contact-icon">📧</div>
                     <div>
                         <div class="contact-label">Email</div>
-                        <div class="contact-value">saurabh.upadhyay1503@gmail.com</div>
+                        <div class="contact-value"><span class="__cf_email__" data-cfemail="84f7e5f1f6e5e6ecaaf1f4e5e0ecfde5fdb5b1b4b7c4e3e9e5ede8aae7ebe9">[email&#160;protected]</span></div>
                     </div>
                 </a>
 
@@ -1710,7 +1710,7 @@
         <p>&copy; 2026 Saurabh Upadhyay. Professional portfolio developed with strategic intention.</p>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Scroll Progress Bar
         window.addEventListener('scroll', () => {
             const scrollProgress = document.getElementById('scrollProgress');
@@ -1742,15 +1742,4 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+                const target = document.querySelector(this.getAttribute('h
