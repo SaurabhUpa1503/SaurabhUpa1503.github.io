@@ -6,18 +6,18 @@
     <title>Saurabh Upadhyay | Strategy & Project Management</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;600;700;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Serif:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #0a1f3d;
-            --secondary: #1e4d7b;
-            --accent: #2196f3;
-            --accent-bright: #64b5f6;
-            --text: #0d1b2a;
-            --text-muted: #5a6f85;
-            --bg: #f8f9fa;
-            --card: #ffffff;
-            --border: #e1e8ed;
+            --deloitte-green: #86BC25;
+            --deloitte-dark: #0D2C54;
+            --deloitte-blue: #00A3E0;
+            --deloitte-navy: #00205C;
+            --text-primary: #2C2C2C;
+            --text-secondary: #5F5F5F;
+            --bg-light: #FFFFFF;
+            --bg-grey: #F7F7F7;
+            --border-light: #E5E5E5;
         }
 
         * {
@@ -31,540 +31,409 @@
         }
 
         body {
-            font-family: 'Archivo', sans-serif;
-            background: var(--bg);
-            color: var(--text);
+            font-family: 'IBM Plex Sans', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 50px;
-        }
-
-        /* Scroll Progress Bar */
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-bright) 100%);
-            z-index: 9999;
-            transition: width 0.1s ease-out;
-        }
-
-        /* Hero Section */
+        /* Hero Section with Network Visualization */
         .hero {
             min-height: 100vh;
+            position: relative;
             display: flex;
             align-items: center;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            position: relative;
+            background: #000000;
             overflow: hidden;
         }
 
-        .hero::before {
-            content: '';
+        /* Network Visualization Layers */
+        .network-canvas {
             position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 80%;
-            height: 150%;
-            background: radial-gradient(circle, rgba(33, 150, 243, 0.15) 0%, transparent 70%);
-            transform: rotate(-15deg);
-            animation: float 20s ease-in-out infinite;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: -30%;
-            left: -15%;
-            width: 70%;
-            height: 120%;
-            background: radial-gradient(circle, rgba(100, 181, 246, 0.1) 0%, transparent 70%);
-            transform: rotate(20deg);
-            animation: float 25s ease-in-out infinite reverse;
-        }
-
-        .hero-layout {
-            position: relative;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 65%;
+            background: 
+                radial-gradient(circle at 15% 85%, rgba(0, 119, 182, 0.3) 0%, transparent 30%),
+                radial-gradient(circle at 45% 90%, rgba(0, 180, 216, 0.25) 0%, transparent 35%),
+                radial-gradient(circle at 75% 88%, rgba(0, 136, 170, 0.28) 0%, transparent 32%);
             z-index: 1;
-            display: grid;
-            grid-template-columns: 1.5fr 1fr;
-            gap: 80px;
-            align-items: center;
-            width: 100%;
         }
 
-        .hero-content {
-            color: white;
+        .network-lines {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 65%;
+            background-image: 
+                linear-gradient(28deg, transparent 47%, rgba(0, 119, 182, 0.5) 49.5%, rgba(0, 119, 182, 0.6) 50%, rgba(0, 119, 182, 0.5) 50.5%, transparent 53%),
+                linear-gradient(152deg, transparent 47%, rgba(0, 180, 216, 0.4) 49.5%, rgba(0, 180, 216, 0.5) 50%, rgba(0, 180, 216, 0.4) 50.5%, transparent 53%),
+                linear-gradient(78deg, transparent 48%, rgba(0, 136, 170, 0.35) 49.5%, rgba(0, 136, 170, 0.45) 50%, rgba(0, 136, 170, 0.35) 50.5%, transparent 52%),
+                linear-gradient(-38deg, transparent 48%, rgba(0, 180, 216, 0.3) 49.5%, rgba(0, 180, 216, 0.4) 50%, rgba(0, 180, 216, 0.3) 50.5%, transparent 52%),
+                linear-gradient(118deg, transparent 47%, rgba(0, 119, 182, 0.35) 49.5%, rgba(0, 119, 182, 0.45) 50%, rgba(0, 119, 182, 0.35) 50.5%, transparent 53%);
+            background-size: 700px 700px, 900px 900px, 550px 550px, 800px 800px, 720px 720px;
+            background-position: 12% 100%, 58% 100%, 84% 92%, 36% 98%, 68% 88%;
+            opacity: 0.85;
+            z-index: 2;
+            animation: networkFloat 10s ease-in-out infinite;
+        }
+
+        .network-nodes {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 65%;
+            z-index: 3;
+        }
+
+        .node {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: rgba(0, 180, 216, 0.9);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(0, 180, 216, 0.7), 0 0 40px rgba(0, 180, 216, 0.4);
+            animation: nodePulse 3.5s ease-in-out infinite;
+        }
+
+        .node:nth-child(1) { bottom: 12%; left: 10%; animation-delay: 0s; }
+        .node:nth-child(2) { bottom: 28%; left: 26%; width: 11px; height: 11px; animation-delay: 0.6s; }
+        .node:nth-child(3) { bottom: 8%; left: 43%; width: 9px; height: 9px; animation-delay: 1.1s; }
+        .node:nth-child(4) { bottom: 32%; left: 60%; width: 12px; height: 12px; animation-delay: 1.7s; }
+        .node:nth-child(5) { bottom: 16%; left: 76%; animation-delay: 2.2s; }
+        .node:nth-child(6) { bottom: 38%; left: 86%; width: 10px; height: 10px; animation-delay: 2.8s; }
+        .node:nth-child(7) { bottom: 6%; left: 34%; animation-delay: 0.9s; }
+        .node:nth-child(8) { bottom: 24%; left: 51%; width: 11px; height: 11px; animation-delay: 2s; }
+
+        @keyframes networkFloat {
+            0%, 100% {
+                opacity: 0.75;
+                transform: translateY(0);
+            }
+            50% {
+                opacity: 0.95;
+                transform: translateY(-8px);
+            }
+        }
+
+        @keyframes nodePulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.9;
+            }
+            50% {
+                transform: scale(1.4);
+                opacity: 1;
+            }
+        }
+
+        .hero-content-wrapper {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 80px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text {
+            max-width: 600px;
         }
 
         .hero-label {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.9rem;
-            letter-spacing: 3px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            color: var(--accent-bright);
-            margin-bottom: 20px;
+            color: var(--deloitte-green);
+            margin-bottom: 24px;
+            display: inline-block;
             opacity: 0;
-            transform: translateY(20px);
             animation: fadeInUp 0.8s ease-out 0.2s forwards;
         }
 
         .hero-title {
-            font-size: 5rem;
-            font-weight: 900;
+            font-family: 'IBM Plex Serif', serif;
+            font-size: 4.5rem;
+            font-weight: 700;
             line-height: 1.1;
-            margin-bottom: 25px;
+            color: #FFFFFF;
+            margin-bottom: 32px;
             opacity: 0;
-            transform: translateY(30px);
             animation: fadeInUp 0.8s ease-out 0.4s forwards;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-title-highlight {
+            color: var(--deloitte-green);
         }
 
         .hero-subtitle {
             font-size: 1.5rem;
-            font-weight: 300;
-            margin-bottom: 20px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 40px;
+            line-height: 1.5;
             opacity: 0;
-            transform: translateY(30px);
             animation: fadeInUp 0.8s ease-out 0.6s forwards;
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
         }
 
         .hero-description {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.8;
+            margin-bottom: 48px;
             opacity: 0;
-            max-width: 650px;
-            line-height: 1.7;
-            margin-bottom: 40px;
-            transform: translateY(30px);
             animation: fadeInUp 0.8s ease-out 0.8s forwards;
+            text-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
         }
 
         .hero-cta {
             display: flex;
             gap: 20px;
-            flex-wrap: wrap;
             opacity: 0;
-            transform: translateY(30px);
             animation: fadeInUp 0.8s ease-out 1s forwards;
         }
 
-        .cta-button {
-            padding: 15px 35px;
+        .cta-primary {
+            padding: 16px 40px;
+            background: var(--deloitte-green);
+            color: white;
             font-size: 1rem;
             font-weight: 600;
             text-decoration: none;
-            border-radius: 6px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            font-family: 'IBM Plex Mono', monospace;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.6s;
-        }
-
-        .cta-button:hover::before {
-            left: 100%;
-        }
-
-        .cta-primary {
-            background: var(--accent);
-            color: white;
-            border: 2px solid var(--accent);
-        }
-
-        .cta-primary:hover {
-            background: var(--accent-bright);
-            border-color: var(--accent-bright);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(33, 150, 243, 0.4);
-        }
-
-        .cta-secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.4);
-        }
-
-        .cta-secondary:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.8);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
-        }
-
-        /* Creative Image Styling */
-        .hero-image-container {
-            position: relative;
-            opacity: 0;
-            transform: translateX(50px);
-            animation: fadeInRight 1s ease-out 0.6s forwards;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            perspective: 1000px;
-        }
-
-        .image-frame {
-            position: relative;
-            width: 100%;
-            max-width: 450px;
-        }
-
-        .image-frame::before {
-            content: '';
-            position: absolute;
-            top: -20px;
-            left: -20px;
-            right: 20px;
-            bottom: 20px;
-            border: 3px solid rgba(100, 181, 246, 0.3);
-            border-radius: 16px;
-            z-index: -1;
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .image-frame::after {
-            content: '';
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            right: -20px;
-            bottom: -20px;
-            background: linear-gradient(135deg, rgba(33, 150, 243, 0.2) 0%, rgba(100, 181, 246, 0.1) 100%);
-            border-radius: 16px;
-            z-index: -2;
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .image-frame:hover::before {
-            top: -25px;
-            left: -25px;
-            right: 25px;
-            bottom: 25px;
-            border-color: rgba(100, 181, 246, 0.6);
-        }
-
-        .image-frame:hover::after {
-            top: 25px;
-            left: 25px;
-            right: -25px;
-            bottom: -25px;
-        }
-
-        .hero-image {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 16px;
-            box-shadow: 
-                0 20px 60px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-            object-fit: cover;
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-image:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 
-                0 30px 80px rgba(0, 0, 0, 0.4),
-                0 0 0 1px rgba(255, 255, 255, 0.2) inset;
-        }
-
-        .image-accent-dot {
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            background: var(--accent-bright);
-            border-radius: 50%;
-            box-shadow: 0 0 20px rgba(100, 181, 246, 0.6);
-            z-index: 2;
-        }
-
-        .dot-1 {
-            top: 30px;
-            right: 30px;
-            animation: pulse 3s ease-in-out infinite;
-        }
-
-        .dot-2 {
-            bottom: 30px;
-            left: 30px;
-            animation: pulse 3s ease-in-out 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            50% {
-                transform: scale(1.5);
-                opacity: 0.7;
-            }
-        }
-
-        /* Fade in on scroll elements */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .fade-in-left {
-            opacity: 0;
-            transform: translateX(-40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .fade-in-left.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .fade-in-right {
-            opacity: 0;
-            transform: translateX(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .fade-in-right.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        /* Section Base */
-        section {
-            padding: 100px 0;
-            position: relative;
-        }
-
-        .section-header {
-            margin-bottom: 60px;
-        }
-
-        .section-tag {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .section-title {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 20px;
-            position: relative;
+            border-radius: 0;
+            transition: all 0.3s ease;
             display: inline-block;
         }
 
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-bright) 100%);
-            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        .cta-primary:hover {
+            background: var(--deloitte-navy);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 32, 92, 0.2);
         }
 
-        .section-title.visible::after {
-            width: 100px;
+        .cta-secondary {
+            padding: 16px 40px;
+            background: transparent;
+            color: var(--deloitte-navy);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border: 2px solid var(--deloitte-navy);
+            border-radius: 0;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .cta-secondary:hover {
+            background: var(--deloitte-navy);
+            color: white;
+        }
+
+        /* Semi-Circle Image Treatment */
+        .hero-image-container {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 50vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeIn 1.2s ease-out 0.6s forwards;
+        }
+
+        .semicircle-wrapper {
+            position: relative;
+            width: 120%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-image {
+            width: 100vh;
+            height: 100vh;
+            object-fit: cover;
+            border-radius: 50%;
+            clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%);
+            filter: grayscale(15%) brightness(1.05);
+            transition: all 0.6s ease;
+        }
+
+        .hero-image:hover {
+            filter: grayscale(0%) brightness(1.1);
+            transform: scale(1.02);
+        }
+
+        .semicircle-accent {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100vh;
+            height: 100vh;
+            border-radius: 50%;
+            border: 2px solid var(--deloitte-green);
+            clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%);
+            opacity: 0.4;
+            animation: pulseRotate 4s ease-in-out infinite;
+        }
+
+        @keyframes pulseRotate {
+            0%, 100% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-50%) scale(1.02); }
+        }
+
+        /* Section Base Styles */
+        section {
+            padding: 120px 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--deloitte-blue);
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+
+        .section-title {
+            font-family: 'IBM Plex Serif', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--deloitte-navy);
+            margin-bottom: 24px;
+            line-height: 1.2;
         }
 
         .section-description {
             font-size: 1.15rem;
-            color: var(--text-muted);
-            max-width: 800px;
+            color: var(--text-secondary);
             line-height: 1.8;
+            margin-bottom: 60px;
+            max-width: 800px;
         }
 
         /* About Section */
-        .about-layout {
+        .about-grid {
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
+            grid-template-columns: 2fr 1fr;
             gap: 80px;
-            align-items: start;
+            margin-top: 60px;
+        }
+
+        .about-content {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: var(--text-primary);
         }
 
         .about-content p {
-            font-size: 1.05rem;
-            line-height: 1.9;
-            margin-bottom: 25px;
-            color: var(--text);
+            margin-bottom: 28px;
         }
 
-        .about-highlights {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            padding: 50px;
-            border-radius: 16px;
+        .about-stats {
+            background: var(--deloitte-navy);
+            padding: 60px 40px;
             color: white;
-            position: sticky;
-            top: 30px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .about-highlights:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        .stat-item {
+            margin-bottom: 48px;
+            border-left: 4px solid var(--deloitte-green);
+            padding-left: 24px;
         }
 
-        .highlight-item {
-            margin-bottom: 35px;
-            opacity: 0;
-            transform: translateX(-20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .highlight-item.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .highlight-item:nth-child(1) { transition-delay: 0.1s; }
-        .highlight-item:nth-child(2) { transition-delay: 0.2s; }
-        .highlight-item:nth-child(3) { transition-delay: 0.3s; }
-        .highlight-item:nth-child(4) { transition-delay: 0.4s; }
-
-        .highlight-item:last-child {
+        .stat-item:last-child {
             margin-bottom: 0;
         }
 
-        .highlight-number {
-            font-size: 3rem;
-            font-weight: 900;
+        .stat-number {
+            font-family: 'IBM Plex Serif', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--deloitte-green);
             line-height: 1;
-            margin-bottom: 10px;
-            color: var(--accent-bright);
-            transition: transform 0.3s ease;
+            margin-bottom: 12px;
         }
 
-        .highlight-item:hover .highlight-number {
-            transform: scale(1.1);
-        }
-
-        .highlight-text {
-            font-size: 1.05rem;
-            opacity: 0.95;
+        .stat-label {
+            font-size: 1rem;
+            color: white;
             line-height: 1.5;
         }
 
-        /* Projects Grid */
-        .projects-grid {
-            display: grid;
-            gap: 40px;
-            margin-top: 40px;
+        /* Projects Section */
+        .projects-section {
+            background: var(--bg-grey);
         }
 
         .project-card {
-            background: var(--card);
-            padding: 45px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            border-left: 4px solid var(--accent);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(33, 150, 243, 0.05), transparent);
-            transition: left 0.6s;
-        }
-
-        .project-card:hover::before {
-            left: 100%;
+            background: var(--bg-light);
+            padding: 60px;
+            margin-bottom: 40px;
+            border-left: 6px solid var(--deloitte-green);
+            transition: all 0.3s ease;
         }
 
         .project-card:hover {
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-            transform: translateX(8px) translateY(-3px);
-            border-left-width: 6px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+            transform: translateX(8px);
         }
 
         .project-header {
             display: flex;
             justify-content: space-between;
             align-items: start;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-            gap: 15px;
+            margin-bottom: 28px;
         }
 
         .project-title {
-            font-size: 1.5rem;
+            font-family: 'IBM Plex Serif', serif;
+            font-size: 1.75rem;
             font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 8px;
-            transition: color 0.3s ease;
-        }
-
-        .project-card:hover .project-title {
-            color: var(--accent);
+            color: var(--deloitte-navy);
+            margin-bottom: 12px;
         }
 
         .project-client {
             font-size: 1.15rem;
-            color: var(--accent);
+            color: var(--deloitte-blue);
             font-weight: 600;
         }
 
         .project-date {
-            font-family: 'IBM Plex Mono', monospace;
             font-size: 0.9rem;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             font-weight: 500;
-            background: var(--bg);
-            padding: 8px 16px;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .project-card:hover .project-date {
-            background: var(--accent);
-            color: white;
+            background: var(--bg-grey);
+            padding: 8px 20px;
         }
 
         .project-description {
-            color: var(--text-muted);
-            margin-bottom: 25px;
             font-size: 1.05rem;
+            color: var(--text-secondary);
             line-height: 1.8;
+            margin-bottom: 28px;
         }
 
         .project-achievements {
@@ -572,36 +441,28 @@
         }
 
         .project-achievements li {
-            padding-left: 30px;
-            margin-bottom: 15px;
+            padding-left: 28px;
+            margin-bottom: 16px;
             position: relative;
-            line-height: 1.7;
-            font-size: 0.98rem;
-            transition: transform 0.2s ease;
-        }
-
-        .project-achievements li:hover {
-            transform: translateX(5px);
+            line-height: 1.8;
+            color: var(--text-primary);
         }
 
         .project-achievements li::before {
-            content: '→';
+            content: '';
             position: absolute;
             left: 0;
-            color: var(--accent);
-            font-weight: bold;
-            font-size: 1.2rem;
-            transition: transform 0.2s ease;
-        }
-
-        .project-achievements li:hover::before {
-            transform: translateX(3px);
+            top: 10px;
+            width: 12px;
+            height: 2px;
+            background: var(--deloitte-green);
         }
 
         /* Experience Timeline */
         .timeline {
             position: relative;
-            padding-left: 50px;
+            padding-left: 60px;
+            margin-top: 60px;
         }
 
         .timeline::before {
@@ -610,94 +471,62 @@
             left: 0;
             top: 0;
             bottom: 0;
-            width: 3px;
-            background: linear-gradient(180deg, var(--accent) 0%, var(--accent-bright) 100%);
+            width: 4px;
+            background: var(--deloitte-green);
         }
 
         .timeline-item {
             position: relative;
             margin-bottom: 60px;
             padding: 40px;
-            background: var(--card);
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: var(--bg-light);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
         }
 
         .timeline-item:hover {
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-            transform: translateX(10px) scale(1.02);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
         }
 
         .timeline-item::before {
             content: '';
             position: absolute;
-            left: -57px;
+            left: -68px;
             top: 50px;
-            width: 14px;
-            height: 14px;
-            background: var(--accent);
-            border: 4px solid var(--bg);
+            width: 16px;
+            height: 16px;
+            background: var(--deloitte-green);
+            border: 4px solid var(--bg-light);
             border-radius: 50%;
-            transition: all 0.3s ease;
-        }
-
-        .timeline-item:hover::before {
-            width: 20px;
-            height: 20px;
-            left: -60px;
-            background: var(--accent-bright);
-            box-shadow: 0 0 0 6px rgba(33, 150, 243, 0.2);
-        }
-
-        .timeline-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 15px;
         }
 
         .timeline-role {
-            font-size: 1.5rem;
+            font-family: 'IBM Plex Serif', serif;
+            font-size: 1.75rem;
             font-weight: 700;
-            color: var(--primary);
+            color: var(--deloitte-navy);
             margin-bottom: 8px;
-            transition: color 0.3s ease;
-        }
-
-        .timeline-item:hover .timeline-role {
-            color: var(--accent);
         }
 
         .timeline-company {
-            font-size: 1.1rem;
-            color: var(--accent);
+            font-size: 1.15rem;
+            color: var(--deloitte-blue);
             font-weight: 600;
+            margin-bottom: 20px;
         }
 
         .timeline-period {
-            font-family: 'IBM Plex Mono', monospace;
             font-size: 0.9rem;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             font-weight: 500;
-            background: var(--bg);
-            padding: 8px 16px;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .timeline-item:hover .timeline-period {
-            background: var(--accent);
-            color: white;
+            margin-bottom: 24px;
         }
 
         .timeline-description {
-            color: var(--text-muted);
-            margin-bottom: 25px;
             font-size: 1.05rem;
+            color: var(--text-secondary);
             line-height: 1.8;
+            margin-bottom: 24px;
         }
 
         .timeline-achievements {
@@ -705,424 +534,253 @@
         }
 
         .timeline-achievements li {
-            padding-left: 30px;
-            margin-bottom: 15px;
+            padding-left: 28px;
+            margin-bottom: 16px;
             position: relative;
-            line-height: 1.7;
-            font-size: 0.98rem;
-            transition: transform 0.2s ease;
-        }
-
-        .timeline-achievements li:hover {
-            transform: translateX(5px);
+            line-height: 1.8;
         }
 
         .timeline-achievements li::before {
-            content: '→';
+            content: '';
             position: absolute;
             left: 0;
-            color: var(--accent);
-            font-weight: bold;
-            font-size: 1.2rem;
-            transition: transform 0.2s ease;
+            top: 10px;
+            width: 12px;
+            height: 2px;
+            background: var(--deloitte-green);
         }
 
-        .timeline-achievements li:hover::before {
-            transform: translateX(3px);
-        }
-
-        /* Skills Grid */
-        .skills-container {
+        /* Skills Section */
+        .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 60px;
         }
 
-        .skill-box {
-            background: var(--card);
+        .skill-category {
+            background: var(--bg-light);
             padding: 40px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
         }
 
-        .skill-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--accent);
-            transform: scaleY(0);
-            transform-origin: bottom;
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        .skill-category:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            border-color: var(--deloitte-green);
         }
 
-        .skill-box::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(33, 150, 243, 0.05) 0%, transparent 100%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .skill-box:hover::before {
-            transform: scaleY(1);
-        }
-
-        .skill-box:hover::after {
-            opacity: 1;
-        }
-
-        .skill-box:hover {
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transform: translateY(-8px);
-        }
-
-        .skill-box h3 {
-            font-size: 1.3rem;
+        .skill-category h3 {
+            font-family: 'IBM Plex Serif', serif;
+            font-size: 1.5rem;
             font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 25px;
-            position: relative;
-            z-index: 1;
+            color: var(--deloitte-navy);
+            margin-bottom: 28px;
         }
 
         .skill-list {
             display: flex;
             flex-wrap: wrap;
             gap: 12px;
-            position: relative;
-            z-index: 1;
         }
 
-        .skill-item {
+        .skill-tag {
             padding: 10px 20px;
-            background: var(--bg);
-            border-radius: 6px;
+            background: var(--bg-grey);
+            color: var(--text-primary);
             font-size: 0.9rem;
             font-weight: 500;
-            color: var(--text);
-            border: 1px solid var(--border);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: default;
+            transition: all 0.3s ease;
         }
 
-        .skill-item:hover {
-            background: var(--accent);
+        .skill-tag:hover {
+            background: var(--deloitte-navy);
             color: white;
-            border-color: var(--accent);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
         }
 
-        /* Achievements Grid */
-        .achievements-container {
+        /* Achievements Section */
+        .achievements-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 60px;
         }
 
-        .achievement-box {
-            background: var(--card);
+        .achievement-card {
+            background: var(--bg-light);
             padding: 40px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
+            border: 1px solid var(--border-light);
             text-align: center;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
+            transition: all 0.3s ease;
         }
 
-        .achievement-box::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: radial-gradient(circle, rgba(33, 150, 243, 0.1) 0%, transparent 70%);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s ease, height 0.6s ease;
-            border-radius: 50%;
-        }
-
-        .achievement-box:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        .achievement-box:hover {
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-            transform: translateY(-10px);
-            border-color: var(--accent);
+        .achievement-card:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            border-color: var(--deloitte-green);
         }
 
         .achievement-icon {
             font-size: 3rem;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .achievement-box:hover .achievement-icon {
-            transform: scale(1.2) rotate(5deg);
+            margin-bottom: 24px;
         }
 
         .achievement-title {
             font-size: 1.15rem;
             font-weight: 700;
-            color: var(--primary);
+            color: var(--deloitte-navy);
             margin-bottom: 12px;
             line-height: 1.4;
-            position: relative;
-            z-index: 1;
         }
 
         .achievement-subtitle {
             font-size: 0.95rem;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             line-height: 1.6;
-            position: relative;
-            z-index: 1;
         }
 
         /* Interests Section */
-        .interests-container {
+        .interests-section {
+            background: var(--deloitte-navy);
+            color: white;
+        }
+
+        .interests-section .section-label {
+            color: var(--deloitte-green);
+        }
+
+        .interests-section .section-title {
+            color: white;
+        }
+
+        .interests-section .section-description {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .interests-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
+            gap: 40px;
+            margin-top: 60px;
         }
 
         .interest-card {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: rgba(255, 255, 255, 0.05);
             padding: 50px 40px;
-            border-radius: 12px;
-            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .interest-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, transparent 100%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .interest-card::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s ease, height 0.6s ease;
-            border-radius: 50%;
-        }
-
-        .interest-card:hover::before {
-            opacity: 1;
-        }
-
-        .interest-card:hover::after {
-            width: 400px;
-            height: 400px;
+            transition: all 0.3s ease;
         }
 
         .interest-card:hover {
-            transform: translateY(-12px) scale(1.05);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--deloitte-green);
         }
 
         .interest-emoji {
             font-size: 3rem;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .interest-card:hover .interest-emoji {
-            transform: scale(1.2) rotate(-5deg);
+            margin-bottom: 24px;
         }
 
         .interest-title {
             font-size: 1.3rem;
             font-weight: 700;
-            margin-bottom: 15px;
-            position: relative;
-            z-index: 1;
+            margin-bottom: 16px;
         }
 
         .interest-text {
             font-size: 1rem;
-            opacity: 0.95;
+            opacity: 0.9;
             line-height: 1.7;
-            position: relative;
-            z-index: 1;
         }
 
-        /* Contact Form Section */
+        /* Contact Section */
         .contact-section {
-            background: var(--card);
-            border-top: 1px solid var(--border);
+            background: var(--bg-grey);
         }
 
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 80px;
-            align-items: start;
-        }
-
-        .contact-info h2 {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 25px;
-        }
-
-        .contact-info p {
-            font-size: 1.15rem;
-            color: var(--text-muted);
-            line-height: 1.8;
-            margin-bottom: 30px;
+            margin-top: 60px;
         }
 
         .contact-methods {
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            margin-top: 40px;
+            gap: 24px;
         }
 
         .contact-link {
             display: flex;
             align-items: center;
-            gap: 20px;
-            padding: 20px 25px;
-            background: var(--bg);
-            border-radius: 10px;
+            gap: 24px;
+            padding: 28px;
+            background: var(--bg-light);
             text-decoration: none;
-            color: var(--text);
-            border: 1px solid var(--border);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(33, 150, 243, 0.1), transparent);
-            transition: left 0.6s;
-        }
-
-        .contact-link:hover::before {
-            left: 100%;
+            color: var(--text-primary);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
         }
 
         .contact-link:hover {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-            transform: translateX(10px);
-            box-shadow: 0 10px 30px rgba(10, 31, 61, 0.2);
+            border-color: var(--deloitte-green);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
         }
 
         .contact-icon {
-            font-size: 1.8rem;
-            transition: transform 0.3s ease;
-        }
-
-        .contact-link:hover .contact-icon {
-            transform: scale(1.2) rotate(5deg);
-        }
-
-        .contact-details {
-            flex: 1;
+            font-size: 2rem;
         }
 
         .contact-label {
             font-size: 0.85rem;
-            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
-            opacity: 0.7;
-            margin-bottom: 5px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
         }
 
         .contact-value {
             font-size: 1.05rem;
             font-weight: 600;
+            color: var(--deloitte-navy);
         }
 
         /* Contact Form */
-        .contact-form-container {
-            background: var(--bg);
+        .contact-form {
+            background: var(--bg-light);
             padding: 50px;
-            border-radius: 16px;
-            border: 1px solid var(--border);
-            transition: box-shadow 0.3s ease;
-        }
-
-        .contact-form-container:hover {
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border-light);
         }
 
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 28px;
         }
 
         .form-group label {
             display: block;
             font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 10px;
+            color: var(--deloitte-navy);
+            margin-bottom: 12px;
             font-size: 0.95rem;
-            transition: color 0.3s ease;
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 15px;
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            font-family: 'Archivo', sans-serif;
+            padding: 16px;
+            border: 2px solid var(--border-light);
+            font-family: 'IBM Plex Sans', sans-serif;
             font-size: 1rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            background: white;
+            transition: all 0.3s ease;
+            background: var(--bg-light);
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 4px rgba(33, 150, 243, 0.1);
-            transform: translateY(-2px);
+            border-color: var(--deloitte-green);
         }
 
         .form-group textarea {
@@ -1133,50 +791,25 @@
         .submit-button {
             width: 100%;
             padding: 18px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: var(--deloitte-green);
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 600;
-            font-family: 'IBM Plex Mono', monospace;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .submit-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.6s;
-        }
-
-        .submit-button:hover::before {
-            left: 100%;
+            transition: all 0.3s ease;
         }
 
         .submit-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(33, 150, 243, 0.4);
-        }
-
-        .submit-button:active {
-            transform: translateY(-1px);
+            background: var(--deloitte-navy);
         }
 
         /* Footer */
         footer {
-            background: var(--primary);
+            background: var(--deloitte-navy);
             color: white;
             text-align: center;
-            padding: 40px 0;
-            font-size: 0.95rem;
+            padding: 60px 80px;
         }
 
         footer p {
@@ -1195,593 +828,496 @@
             }
         }
 
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(-15deg); }
-            50% { transform: translateY(-30px) rotate(-15deg); }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         /* Responsive Design */
         @media (max-width: 1200px) {
+            .hero-content-wrapper {
+                padding: 0 40px;
+            }
+
             .hero-title {
-                font-size: 4rem;
+                font-size: 3.5rem;
             }
 
-            .hero-layout {
+            section {
+                padding: 80px 40px;
+            }
+
+            .about-grid {
                 grid-template-columns: 1fr;
-                gap: 50px;
             }
 
-            .image-frame {
-                max-width: 350px;
-                margin: 0 auto;
-            }
-
-            .about-layout {
-                grid-template-columns: 1fr;
-                gap: 50px;
-            }
-
-            .about-highlights {
-                position: static;
+            .skills-grid,
+            .achievements-grid,
+            .interests-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
 
             .contact-grid {
                 grid-template-columns: 1fr;
-                gap: 50px;
             }
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 0 25px;
-            }
-
             .hero {
                 min-height: auto;
-                padding: 80px 0;
+                padding: 60px 0;
+            }
+
+            .hero-content-wrapper {
+                grid-template-columns: 1fr;
+                padding: 0 24px;
+            }
+
+            .hero-image-container {
+                position: static;
+                width: 100%;
+                height: 400px;
+                margin-top: 40px;
+            }
+
+            .semicircle-wrapper {
+                width: 100%;
+            }
+
+            .hero-image {
+                width: 100%;
+                height: 400px;
+                clip-path: none;
+                border-radius: 0;
+            }
+
+            .semicircle-accent {
+                display: none;
             }
 
             .hero-title {
                 font-size: 2.5rem;
             }
 
-            .hero-subtitle {
-                font-size: 1.2rem;
-            }
-
             section {
-                padding: 60px 0;
+                padding: 60px 24px;
             }
 
             .section-title {
                 font-size: 2rem;
             }
 
+            .skills-grid,
+            .achievements-grid,
+            .interests-grid {
+                grid-template-columns: 1fr;
+            }
+
             .timeline {
-                padding-left: 30px;
+                padding-left: 40px;
             }
 
             .timeline-item::before {
-                left: -37px;
-            }
-
-            .interests-container {
-                grid-template-columns: 1fr;
-            }
-
-            .skills-container {
-                grid-template-columns: 1fr;
-            }
-
-            .achievements-container {
-                grid-template-columns: 1fr;
-            }
-
-            .hero-cta {
-                flex-direction: column;
-            }
-
-            .cta-button {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .contact-form-container {
-                padding: 30px;
-            }
-
-            .image-frame::before,
-            .image-frame::after {
-                display: none;
+                left: -48px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="scroll-progress" id="scrollProgress"></div>
-
     <section class="hero">
-        <div class="container">
-            <div class="hero-layout">
-                <div class="hero-content">
-                    <div class="hero-label">Strategy · Project Management · Consulting</div>
-                    <h1 class="hero-title">Saurabh<br>Upadhyay</h1>
-                    <div class="hero-subtitle">Transforming Data Into Strategy. Strategy Into Growth.</div>
-                    <p class="hero-description">
-                        Five years of turning complex business problems into executable plans. Leading cross-functional teams. Making decisions that stick. Currently sharpening my MBA toolkit at University of Edinburgh.
-                    </p>
-                    <div class="hero-cta">
-                        <a href="#contact" class="cta-button cta-primary">
-                            Get In Touch →
-                        </a>
-                        <a href="https://www.linkedin.com/in/saurabh-upadhyay-srbh" target="_blank" class="cta-button cta-secondary">
-                            View LinkedIn
-                        </a>
-                    </div>
+        <div class="network-canvas"></div>
+        <div class="network-lines"></div>
+        <div class="network-nodes">
+            <div class="node"></div>
+            <div class="node"></div>
+            <div class="node"></div>
+            <div class="node"></div>
+            <div class="node"></div>
+            <div class="node"></div>
+            <div class="node"></div>
+            <div class="node"></div>
+        </div>
+        <div class="hero-content-wrapper">
+            <div class="hero-text">
+                <div class="hero-label">Strategy · Consulting · Project Management</div>
+                <h1 class="hero-title">
+                    Saurabh<br>
+                    <span class="hero-title-highlight">Upadhyay</span>
+                </h1>
+                <div class="hero-subtitle">
+                    Transforming complexity into clarity through strategic frameworks and execution excellence
                 </div>
-                <div class="hero-image-container">
-                    <div class="image-frame">
-                        <img src="./profile-photo.jpg" alt="Saurabh Upadhyay" class="hero-image">
-                        <div class="image-accent-dot dot-1"></div>
-                        <div class="image-accent-dot dot-2"></div>
-                    </div>
+                <p class="hero-description">
+                    Five years of delivering measurable business outcomes across financial services, technology, and consulting. Combining analytical rigor with strategic thinking to drive organizational growth and operational transformation.
+                </p>
+                <div class="hero-cta">
+                    <a href="#contact" class="cta-primary">Get In Touch</a>
+                    <a href="https://www.linkedin.com/in/saurabh-upadhyay-srbh" target="_blank" class="cta-secondary">View LinkedIn</a>
                 </div>
+            </div>
+        </div>
+        <div class="hero-image-container">
+            <div class="semicircle-wrapper">
+                <img src="./profile-photo.jpg" alt="Saurabh Upadhyay" class="hero-image">
+                <div class="semicircle-accent"></div>
             </div>
         </div>
     </section>
 
     <section id="about">
-        <div class="container">
-            <div class="section-header fade-in">
-                <div class="section-tag">Introduction</div>
-                <h2 class="section-title">Strategy Without the Jargon</h2>
-                <p class="section-description">
-                    Five years into business strategy and project management, I have learned that good frameworks beat fancy buzzwords. Every time.
-                </p>
+        <div class="section-label">Introduction</div>
+        <h2 class="section-title">Building Strategies That Scale</h2>
+        <p class="section-description">
+            Professional strategist combining analytical depth with practical execution across financial services, technology, and consulting engagements.
+        </p>
+        <div class="about-grid">
+            <div class="about-content">
+                <p>Professional experience spans business strategy, project management, and organizational transformation across multiple sectors. At Susamridh Nidhi Bank, led strategic growth initiatives that expanded financial inclusion through structured market segmentation and coordinated channel deployment, delivering forty-eight percent customer acquisition growth within two quarters.</p>
+                <p>Prior experience at Wipro involved orchestrating complex research and development projects for autonomous vehicle programs, managing requirements and stakeholder communications across fifty enterprise clients while achieving complete project adoption across global accounts. Technical background in electronics and communication engineering provides foundation for systematic problem-solving and analytical thinking.</p>
+                <p>Currently pursuing MBA at University of Edinburgh Business School while executing consulting engagements for clients including NatWest Group, Streets Ahead, and Predictiva. Projects focus on strategic positioning, market entry frameworks, and evidence-based recommendations for organizational transformation.</p>
+                <p>Certified by Microsoft for Power BI and Azure fundamentals, and by Google for Analytics. Professional approach combines technical competence with strategic thinking, enabling translation of complex challenges into executable solutions that deliver measurable business outcomes.</p>
             </div>
-            <div class="about-layout">
-                <div class="about-content fade-in-left">
-                    <p>I spent my first three years at Wipro orchestrating complex research and development projects for autonomous vehicle programs, where I learned that clarity beats complexity. Leading technical demonstrations for fifty enterprise clients and managing cross-functional stakeholders taught me that good documentation saves careers while poor communication destroys them.</p>
-                    <p>Then I moved to Susamridh Nidhi Bank as Business Strategy Manager, where I led growth initiatives that expanded financial inclusion across underserved regions. Driving forty-eight percent customer acquisition in two quarters while applying predictive analytics to enable thirty percent revenue growth demonstrated that numbers can tell compelling stories when properly framed. Reducing the cash conversion cycle by thirty-five percent proved that executives actually act on well-presented data.</p>
-                    <p>Currently pursuing my MBA at University of Edinburgh Business School, I am consulting for real clients on real problems. Helping Streets Ahead secure potential funding of fifty thousand pounds through data-driven impact measurement shows that proper frameworks create tangible value. Designing market entry strategies for Predictiva targeting Gulf Cooperation Council and Middle East North Africa markets while advising NatWest Group on digital asset opportunities demonstrates that strategic thinking translates across industries.</p>
-                    <p>Certified by Microsoft for Power BI and Azure, and by Google for Analytics, I am battle-tested by actual project delivery. I code when Excel refuses to cooperate, visualize data that tells stories, and build frameworks that scale beyond their initial scope.</p>
-                    <p>When I am not dissecting case studies or optimizing processes, you will find me trekking through hills, exploring cities on foot, or journaling reflective thoughts. The best ideas happen away from screens.</p>
+            <div class="about-stats">
+                <div class="stat-item">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">Years Professional Experience</div>
                 </div>
-                <div class="about-highlights fade-in-right">
-                    <div class="highlight-item">
-                        <div class="highlight-number">5+</div>
-                        <div class="highlight-text">Years driving strategy, projects, and growth</div>
-                    </div>
-                    <div class="highlight-item">
-                        <div class="highlight-number">48%</div>
-                        <div class="highlight-text">Customer acquisition increase at Susamridh</div>
-                    </div>
-                    <div class="highlight-item">
-                        <div class="highlight-number">50+</div>
-                        <div class="highlight-text">Enterprise clients managed at Wipro</div>
-                    </div>
-                    <div class="highlight-item">
-                        <div class="highlight-number">£50K</div>
-                        <div class="highlight-text">Potential funding enabled through consulting</div>
-                    </div>
+                <div class="stat-item">
+                    <div class="stat-number">48%</div>
+                    <div class="stat-label">Customer Growth Delivered</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">£50K</div>
+                    <div class="stat-label">Funding Enabled Through Consulting</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Enterprise Client Engagements</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="projects">
-        <div class="container">
-            <div class="section-header fade-in">
-                <div class="section-tag">MBA Consulting Work</div>
-                <h2 class="section-title">Where Strategy Meets Reality</h2>
-                <p class="section-description">
-                    Real clients facing real challenges producing real impact. Consulting projects that went beyond PowerPoint decks.
-                </p>
-            </div>
-            <div class="projects-grid">
-                <div class="project-card fade-in">
-                    <div class="project-header">
-                        <div>
-                            <div class="project-title">Strategic Consulting: Digital Assets Market Entry</div>
-                            <div class="project-client">NatWest Group</div>
-                        </div>
-                        <div class="project-date">2025</div>
-                    </div>
-                    <div class="project-description">
-                        Consulted NatWest Group on major market shift dynamics towards digital assets like cryptocurrency. Analyzed market potential and competitive threats of strategic positioning within the United Kingdom digital assets sector.
-                    </div>
-                    <ul class="project-achievements">
-                        <li>Conducted comprehensive market analysis of United Kingdom digital assets landscape, evaluating regulatory environment, competitive positioning, and emerging opportunities in cryptocurrency and blockchain technologies</li>
-                        <li>Assessed strategic implications of market entry timing, identifying critical success factors and potential barriers to adoption within traditional banking infrastructure</li>
-                        <li>Delivered evidence-based recommendations for strategic positioning, including phased implementation roadmap balancing innovation opportunities against regulatory compliance and risk management</li>
-                        <li>Provided actionable framework for evaluating build versus partnership strategies in digital asset custody, trading, and advisory services</li>
-                    </ul>
-                </div>
+    <section id="projects" class="projects-section">
+        <div class="section-label">MBA Consulting Engagements</div>
+        <h2 class="section-title">Strategic Advisory Work</h2>
+        <p class="section-description">
+            Client engagements delivering actionable frameworks, evidence-based recommendations, and measurable business outcomes across financial services and nonprofit sectors.
+        </p>
 
-                <div class="project-card fade-in">
-                    <div class="project-header">
-                        <div>
-                            <div class="project-title">Strategic Rebranding & Impact Measurement</div>
-                            <div class="project-client">Streets Ahead (Disability Support NGO)</div>
-                        </div>
-                        <div class="project-date">2025</div>
-                    </div>
-                    <div class="project-description">
-                        Led strategic consulting engagement for disability support organization in Edinburgh, focusing on rebranding strategy and measurable impact demonstration for funding applications.
-                    </div>
-                    <ul class="project-achievements">
-                        <li>Executed comprehensive market research across twelve competitor organizations and interviewed eight key stakeholders to understand positioning gaps and donor expectations</li>
-                        <li>Formulated strategic rebranding roadmap with fifteen defined milestones projected to increase donor engagement by twenty-five percent through clearer mission articulation and impact storytelling</li>
-                        <li>Architected data-driven impact measurement framework analyzing over two hundred client touchpoints, quantifying service delivery outcomes and social value creation</li>
-                        <li>Enabled organization to pursue three new grant applications worth an estimated fifty thousand pounds in potential funding through evidence-based impact demonstration and strategic positioning</li>
-                    </ul>
+        <div class="project-card">
+            <div class="project-header">
+                <div>
+                    <div class="project-client">NatWest Group</div>
+                    <div class="project-title">Digital Assets Market Entry Strategy</div>
                 </div>
-
-                <div class="project-card fade-in">
-                    <div class="project-header">
-                        <div>
-                            <div class="project-title">Market Entry Strategy: GCC & MENA Expansion</div>
-                            <div class="project-client">Predictiva (Fintech)</div>
-                        </div>
-                        <div class="project-date">2025</div>
-                    </div>
-                    <div class="project-description">
-                        Collaborated with executive leadership to devise comprehensive go-to-market strategy for fintech expansion into Gulf Cooperation Council and Middle East North Africa markets.
-                    </div>
-                    <ul class="project-achievements">
-                        <li>Collaborated with four senior executives over two-month engagement to analyze market entry opportunities across six Gulf Cooperation Council and Middle East North Africa markets with combined addressable market of two point five million pounds</li>
-                        <li>Conducted competitive landscape analysis, regulatory environment assessment, and customer segmentation to identify high-potential market entry sequences</li>
-                        <li>Constructed comprehensive risk mitigation plan identifying eighteen potential risks with corresponding mitigation strategies across regulatory, operational, and market acceptance dimensions</li>
-                        <li>Delivered lean-budget marketing framework reducing projected customer acquisition cost by thirty percent through targeted digital channels and strategic partnership models</li>
-                    </ul>
-                </div>
+                <div class="project-date">2025</div>
             </div>
+            <div class="project-description">
+                Strategic consulting engagement analyzing market dynamics for digital asset positioning within United Kingdom banking sector, evaluating competitive threats and regulatory considerations for major financial institution.
+            </div>
+            <ul class="project-achievements">
+                <li>Conducted comprehensive market analysis of United Kingdom digital assets landscape, evaluating regulatory environment, competitive positioning, and emerging opportunities in cryptocurrency and blockchain technologies</li>
+                <li>Assessed strategic implications of market entry timing, identifying critical success factors and potential adoption barriers within traditional banking infrastructure</li>
+                <li>Delivered evidence-based recommendations for strategic positioning, including phased implementation roadmap balancing innovation opportunities against regulatory compliance and risk management</li>
+                <li>Provided actionable framework for evaluating build versus partnership strategies in digital asset custody, trading, and advisory services</li>
+            </ul>
+        </div>
+
+        <div class="project-card">
+            <div class="project-header">
+                <div>
+                    <div class="project-client">Streets Ahead (Disability Support NGO)</div>
+                    <div class="project-title">Strategic Rebranding & Impact Measurement</div>
+                </div>
+                <div class="project-date">2025</div>
+            </div>
+            <div class="project-description">
+                Led strategic consulting engagement for disability support organization in Edinburgh, focusing on rebranding strategy and measurable impact demonstration for funding applications.
+            </div>
+            <ul class="project-achievements">
+                <li>Executed comprehensive market research across twelve competitor organizations and interviewed eight key stakeholders to understand positioning gaps and donor expectations</li>
+                <li>Formulated strategic rebranding roadmap with fifteen defined milestones projected to increase donor engagement by twenty-five percent through clearer mission articulation and impact storytelling</li>
+                <li>Architected data-driven impact measurement framework analyzing over two hundred client touchpoints, quantifying service delivery outcomes and social value creation</li>
+                <li>Enabled organization to pursue three new grant applications worth estimated fifty thousand pounds in potential funding through evidence-based impact demonstration and strategic positioning</li>
+            </ul>
+        </div>
+
+        <div class="project-card">
+            <div class="project-header">
+                <div>
+                    <div class="project-client">Predictiva (Fintech)</div>
+                    <div class="project-title">GCC & MENA Market Entry Framework</div>
+                </div>
+                <div class="project-date">2025</div>
+            </div>
+            <div class="project-description">
+                Collaborated with executive leadership to devise comprehensive go-to-market strategy for fintech expansion into Gulf Cooperation Council and Middle East North Africa markets.
+            </div>
+            <ul class="project-achievements">
+                <li>Collaborated with four senior executives over two-month engagement to analyze market entry opportunities across six Gulf Cooperation Council and Middle East North Africa markets with combined addressable market of two point five million pounds</li>
+                <li>Conducted competitive landscape analysis, regulatory environment assessment, and customer segmentation to identify high-potential market entry sequences</li>
+                <li>Constructed comprehensive risk mitigation plan identifying eighteen potential risks with corresponding mitigation strategies across regulatory, operational, and market acceptance dimensions</li>
+                <li>Delivered lean-budget marketing framework reducing projected customer acquisition cost by thirty percent through targeted digital channels and strategic partnership models</li>
+            </ul>
         </div>
     </section>
 
     <section id="experience">
-        <div class="container">
-            <div class="section-header fade-in">
-                <div class="section-tag">Professional Journey</div>
-                <h2 class="section-title">Where I Built Things That Matter</h2>
-                <p class="section-description">
-                    Strategy without execution is wishful thinking. Execution without strategy is chaos. I learned to balance both through years of actual delivery.
-                </p>
+        <div class="section-label">Professional Experience</div>
+        <h2 class="section-title">Career Progression</h2>
+        <p class="section-description">
+            Track record of delivering strategic initiatives and managing complex projects across financial services, technology, aerospace, and telecommunications sectors.
+        </p>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-role">Business Strategy Manager / Project Lead</div>
+                <div class="timeline-company">Susamridh Nidhi Bank (Government-backed NBFC)</div>
+                <div class="timeline-period">November 2022 – February 2025</div>
+                <div class="timeline-description">
+                    Spearheaded strategic growth initiatives for government-backed financial institution, expanding financial inclusion through structured project delivery and cross-functional team leadership.
+                </div>
+                <ul class="timeline-achievements">
+                    <li>Delivered forty-eight percent customer acquisition growth within two quarters through structured market segmentation, timeline management, and coordinated channel deployment across multiple regions</li>
+                    <li>Directed cross-functional team of eight members across marketing and analytics, establishing responsibility assignment matrices and accountability structures improving reporting efficiency by twenty percent</li>
+                    <li>Built predictive collection models enabling thirty percent revenue growth through proactive risk identification and data-driven decision frameworks</li>
+                    <li>Facilitated financial intelligence workshops improving cross-team comprehension and reducing cash conversion cycle by thirty-five percent</li>
+                    <li>Synthesized financial and operational data into executive dashboards and status reports, empowering senior leadership decision-making</li>
+                </ul>
             </div>
-            <div class="timeline">
-                <div class="timeline-item fade-in">
-                    <div class="timeline-header">
-                        <div>
-                            <div class="timeline-role">Business Strategy Manager / Project Lead</div>
-                            <div class="timeline-company">Susamridh Nidhi Bank (Government-backed NBFC)</div>
-                        </div>
-                        <div class="timeline-period">Nov 2022 – Feb 2025</div>
-                    </div>
-                    <div class="timeline-description">
-                        Spearheaded strategic growth initiatives for government-backed financial institution. Turned financial inclusion from corporate buzzword into measurable reality across underserved regions through structured project delivery.
-                    </div>
-                    <ul class="timeline-achievements">
-                        <li>Delivered forty-eight percent customer acquisition growth within two quarters through structured market segmentation, timeline management, and coordinated channel deployment across multiple regions</li>
-                        <li>Directed cross-functional team of eight members across marketing and analytics, establishing responsibility assignment matrices and accountability structures that improved reporting efficiency by twenty percent</li>
-                        <li>Built predictive collection models enabling thirty percent revenue growth through proactive risk identification and data-driven decision frameworks</li>
-                        <li>Facilitated financial intelligence workshops that improved cross-team comprehension and reduced cash conversion cycle by thirty-five percent, teaching finance concepts without inducing sleep</li>
-                        <li>Synthesized financial and operational data into executive dashboards and status reports, empowering senior leadership to make informed strategic decisions</li>
-                    </ul>
-                </div>
 
-                <div class="timeline-item fade-in">
-                    <div class="timeline-header">
-                        <div>
-                            <div class="timeline-role">Project Engineer</div>
-                            <div class="timeline-company">Wipro Ltd., Bangalore</div>
-                        </div>
-                        <div class="timeline-period">Jul 2019 – Oct 2022</div>
-                    </div>
-                    <div class="timeline-description">
-                        Orchestrated complex research and development projects for Wipro flagship Software-Defined Vehicle and WIPOD Autonomous Vehicle programs. Managed requirements, stakeholders, and deliverables for technology slowly turning science fiction into commercial reality.
-                    </div>
-                    <ul class="timeline-achievements">
-                        <li>Orchestrated complex requirements for autonomous vehicle programs, translating technical specifications into actionable project plans, client presentations, and stakeholder communications</li>
-                        <li>Engaged with over fifty enterprise clients through technical demonstrations and stakeholder reviews, achieving one hundred percent project adoption rate across global accounts</li>
-                        <li>Streamlined data modeling processes and project workflows, boosting operational efficiency by twenty-five percent and accelerating delivery timelines for global stakeholders</li>
-                        <li>Enhanced velocity dynamics models and implemented multi-operating system integration using QNX platform, making autonomous vehicles incrementally smarter through systematic improvements</li>
-                        <li>Prepared technical documentation and analytical reports that global teams actually read and understood, creating technical writing that avoided collecting digital dust</li>
-                    </ul>
+            <div class="timeline-item">
+                <div class="timeline-role">Project Engineer</div>
+                <div class="timeline-company">Wipro Ltd., Bangalore</div>
+                <div class="timeline-period">July 2019 – October 2022</div>
+                <div class="timeline-description">
+                    Orchestrated complex research and development projects for Wipro flagship Software-Defined Vehicle and WIPOD Autonomous Vehicle programs, managing requirements and stakeholder deliverables.
                 </div>
+                <ul class="timeline-achievements">
+                    <li>Orchestrated complex requirements for autonomous vehicle programs, translating technical specifications into actionable project plans, client presentations, and stakeholder communications</li>
+                    <li>Engaged with over fifty enterprise clients through technical demonstrations and stakeholder reviews, achieving complete project adoption rate across global accounts</li>
+                    <li>Streamlined data modeling processes and project workflows, boosting operational efficiency by twenty-five percent and accelerating delivery timelines for global stakeholders</li>
+                    <li>Enhanced velocity dynamics models and implemented multi-operating system integration using QNX platform</li>
+                    <li>Prepared technical documentation and analytical reports for global teams, creating effective knowledge transfer materials</li>
+                </ul>
+            </div>
 
-                <div class="timeline-item fade-in">
-                    <div class="timeline-header">
-                        <div>
-                            <div class="timeline-role">Technical Intern</div>
-                            <div class="timeline-company">Hindustan Aeronautics Limited, Lucknow</div>
-                        </div>
-                        <div class="timeline-period">Jun 2018 – Aug 2018</div>
-                    </div>
-                    <div class="timeline-description">
-                        Analyzed business domains across Hindustan Aeronautics Limited with focus on production and inventory management within aerospace manufacturing context.
-                    </div>
-                    <ul class="timeline-achievements">
-                        <li>Assessed production workflows and inventory management processes across multiple aerospace manufacturing divisions, gaining exposure to complex supply chain dynamics</li>
-                        <li>Generated performance index reports for various organizational divisions to support leadership decision-making, learning that aerospace manufacturing operates at entirely different complexity levels than consumer industries</li>
-                        <li>Gained foundational understanding of aerospace manufacturing workflows, quality control standards, and regulatory compliance requirements that shape the industry</li>
-                    </ul>
+            <div class="timeline-item">
+                <div class="timeline-role">Technical Intern</div>
+                <div class="timeline-company">Hindustan Aeronautics Limited, Lucknow</div>
+                <div class="timeline-period">June 2018 – August 2018</div>
+                <div class="timeline-description">
+                    Analyzed business domains across Hindustan Aeronautics Limited with focus on production and inventory management within aerospace manufacturing context.
                 </div>
+                <ul class="timeline-achievements">
+                    <li>Assessed production workflows and inventory management processes across multiple aerospace manufacturing divisions</li>
+                    <li>Generated performance index reports for various organizational divisions supporting leadership decision-making</li>
+                    <li>Gained foundational understanding of aerospace manufacturing workflows, quality control standards, and regulatory compliance requirements</li>
+                </ul>
+            </div>
 
-                <div class="timeline-item fade-in">
-                    <div class="timeline-header">
-                        <div>
-                            <div class="timeline-role">Network Operations Intern</div>
-                            <div class="timeline-company">Idea Cellular (now Vodafone Idea), Lucknow</div>
-                        </div>
-                        <div class="timeline-period">May 2017 – Aug 2017</div>
-                    </div>
-                    <div class="timeline-description">
-                        Contributed to network operations and performance optimization initiatives within telecommunications infrastructure management.
-                    </div>
-                    <ul class="timeline-achievements">
-                        <li>Generated comprehensive reports and analyzed base transceiver station performance data, resulting in zone mapping improvements that enhanced network monitoring capabilities by thirty percent</li>
-                        <li>Created network performance assessment reports and debugged network modules to reduce call latency by ten percent, improving service quality metrics across monitored zones</li>
-                        <li>Developed practical understanding of telecommunications infrastructure operations, network optimization methodologies, and performance monitoring systems</li>
-                    </ul>
+            <div class="timeline-item">
+                <div class="timeline-role">Network Operations Intern</div>
+                <div class="timeline-company">Idea Cellular (now Vodafone Idea), Lucknow</div>
+                <div class="timeline-period">May 2017 – August 2017</div>
+                <div class="timeline-description">
+                    Contributed to network operations and performance optimization initiatives within telecommunications infrastructure management.
                 </div>
+                <ul class="timeline-achievements">
+                    <li>Generated comprehensive reports and analyzed base transceiver station performance data, resulting in zone mapping improvements enhancing network monitoring capabilities by thirty percent</li>
+                    <li>Created network performance assessment reports and debugged network modules to reduce call latency by ten percent</li>
+                    <li>Developed practical understanding of telecommunications infrastructure operations, network optimization methodologies, and performance monitoring systems</li>
+                </ul>
             </div>
         </div>
     </section>
 
     <section id="skills">
-        <div class="container">
-            <div class="section-header fade-in">
-                <div class="section-tag">Capabilities</div>
-                <h2 class="section-title">Technical & Strategic Arsenal</h2>
-                <p class="section-description">
-                    Tools mastered through actual use. Frameworks deployed in real projects. Buzzwords backed by demonstrated results.
-                </p>
+        <div class="section-label">Capabilities</div>
+        <h2 class="section-title">Core Competencies</h2>
+        <p class="section-description">
+            Comprehensive skill set spanning project management methodologies, technical platforms, and strategic frameworks developed through professional practice and continuous learning.
+        </p>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3>Project Management</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">Lifecycle Management</span>
+                    <span class="skill-tag">Stakeholder Engagement</span>
+                    <span class="skill-tag">Risk Mitigation</span>
+                    <span class="skill-tag">Resource Planning</span>
+                    <span class="skill-tag">Agile & Waterfall</span>
+                    <span class="skill-tag">Budget Management</span>
+                    <span class="skill-tag">Change Management</span>
+                </div>
             </div>
-            <div class="skills-container">
-                <div class="skill-box fade-in">
-                    <h3>Project Management</h3>
-                    <div class="skill-list">
-                        <span class="skill-item">Lifecycle Management</span>
-                        <span class="skill-item">Stakeholder Engagement</span>
-                        <span class="skill-item">Risk Mitigation</span>
-                        <span class="skill-item">Resource Planning</span>
-                        <span class="skill-item">Agile & Waterfall</span>
-                        <span class="skill-item">Budget Management</span>
-                        <span class="skill-item">Change Management</span>
-                    </div>
-                </div>
 
-                <div class="skill-box fade-in">
-                    <h3>Tools & Platforms</h3>
-                    <div class="skill-list">
-                        <span class="skill-item">Microsoft Project</span>
-                        <span class="skill-item">Jira</span>
-                        <span class="skill-item">Confluence</span>
-                        <span class="skill-item">Power BI</span>
-                        <span class="skill-item">Advanced Excel</span>
-                        <span class="skill-item">Power Automate</span>
-                        <span class="skill-item">Python</span>
-                        <span class="skill-item">MySQL</span>
-                    </div>
+            <div class="skill-category">
+                <h3>Tools & Platforms</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">Microsoft Project</span>
+                    <span class="skill-tag">Jira</span>
+                    <span class="skill-tag">Confluence</span>
+                    <span class="skill-tag">Power BI</span>
+                    <span class="skill-tag">Advanced Excel</span>
+                    <span class="skill-tag">Power Automate</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">MySQL</span>
                 </div>
+            </div>
 
-                <div class="skill-box fade-in">
-                    <h3>Strategic Capabilities</h3>
-                    <div class="skill-list">
-                        <span class="skill-item">Business Strategy</span>
-                        <span class="skill-item">Market Analysis</span>
-                        <span class="skill-item">Financial Modeling</span>
-                        <span class="skill-item">Process Optimization</span>
-                        <span class="skill-item">Data Analytics</span>
-                        <span class="skill-item">Executive Reporting</span>
-                    </div>
+            <div class="skill-category">
+                <h3>Strategic Capabilities</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">Business Strategy</span>
+                    <span class="skill-tag">Market Analysis</span>
+                    <span class="skill-tag">Financial Modeling</span>
+                    <span class="skill-tag">Process Optimization</span>
+                    <span class="skill-tag">Data Analytics</span>
+                    <span class="skill-tag">Executive Reporting</span>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="achievements">
-        <div class="container">
-            <div class="section-header fade-in">
-                <div class="section-tag">Credentials</div>
-                <h2 class="section-title">Achievements & Education</h2>
-                <p class="section-description">
-                    Certificates that matter. What you build with them matters more.
-                </p>
+        <div class="section-label">Credentials</div>
+        <h2 class="section-title">Education & Certifications</h2>
+        <p class="section-description">
+            Academic background and professional certifications supporting technical and strategic competencies across business strategy, data analytics, and technology platforms.
+        </p>
+        <div class="achievements-grid">
+            <div class="achievement-card">
+                <div class="achievement-icon">🎓</div>
+                <div class="achievement-title">MBA Candidate</div>
+                <div class="achievement-subtitle">University of Edinburgh Business School (2025-2026)</div>
             </div>
-            <div class="achievements-container">
-                <div class="achievement-box fade-in">
-                    <div class="achievement-icon">🎓</div>
-                    <div class="achievement-title">MBA Candidate</div>
-                    <div class="achievement-subtitle">University of Edinburgh Business School (2025-2026)</div>
-                </div>
 
-                <div class="achievement-box fade-in">
-                    <div class="achievement-icon">🔧</div>
-                    <div class="achievement-title">B.Tech. Electronics & Communication</div>
-                    <div class="achievement-subtitle">Vellore Institute of Technology | GPA: 8.94/10 (Distinction)</div>
-                </div>
+            <div class="achievement-card">
+                <div class="achievement-icon">🔧</div>
+                <div class="achievement-title">B.Tech. Electronics & Communication</div>
+                <div class="achievement-subtitle">Vellore Institute of Technology | GPA: 8.94/10 (Distinction)</div>
+            </div>
 
-                <div class="achievement-box fade-in">
-                    <div class="achievement-icon">📊</div>
-                    <div class="achievement-title">Power BI Data Analyst</div>
-                    <div class="achievement-subtitle">Microsoft Certified Associate</div>
-                </div>
+            <div class="achievement-card">
+                <div class="achievement-icon">📊</div>
+                <div class="achievement-title">Power BI Data Analyst</div>
+                <div class="achievement-subtitle">Microsoft Certified Associate</div>
+            </div>
 
-                <div class="achievement-box fade-in">
-                    <div class="achievement-icon">☁️</div>
-                    <div class="achievement-title">Azure Fundamentals</div>
-                    <div class="achievement-subtitle">Microsoft Certified</div>
-                </div>
+            <div class="achievement-card">
+                <div class="achievement-icon">☁️</div>
+                <div class="achievement-title">Azure Fundamentals</div>
+                <div class="achievement-subtitle">Microsoft Certified</div>
+            </div>
 
-                <div class="achievement-box fade-in">
-                    <div class="achievement-icon">📈</div>
-                    <div class="achievement-title">Google Analytics Certified</div>
-                    <div class="achievement-subtitle">Certification ID: 169352282</div>
-                </div>
+            <div class="achievement-card">
+                <div class="achievement-icon">📈</div>
+                <div class="achievement-title">Google Analytics Certified</div>
+                <div class="achievement-subtitle">Certification ID: 169352282</div>
+            </div>
+
+            <div class="achievement-card">
+                <div class="achievement-icon">📉</div>
+                <div class="achievement-title">Advanced Excel for Analytics</div>
+                <div class="achievement-subtitle">Udemy Certified</div>
             </div>
         </div>
     </section>
 
-    <section id="interests">
-        <div class="container">
-            <div class="section-header fade-in">
-                <div class="section-tag">Beyond Work</div>
-                <h2 class="section-title">Life Outside the Office</h2>
-                <p class="section-description">
-                    Activities pursued when not optimizing conversion funnels or building project plans.
-                </p>
+    <section id="interests" class="interests-section">
+        <div class="section-label">Beyond Professional Practice</div>
+        <h2 class="section-title">Personal Interests</h2>
+        <p class="section-description">
+            Activities pursued outside professional responsibilities, contributing to balanced perspective and continuous personal development.
+        </p>
+        <div class="interests-grid">
+            <div class="interest-card">
+                <div class="interest-emoji">🥾</div>
+                <div class="interest-title">Trekking</div>
+                <div class="interest-text">Pursuing clarity through high-altitude experiences. Mountain trails provide perspective and mental space unavailable in connected environments.</div>
             </div>
-            <div class="interests-container">
-                <div class="interest-card fade-in">
-                    <div class="interest-emoji">🥾</div>
-                    <div class="interest-title">Trekking</div>
-                    <div class="interest-text">Finding clarity at altitude. Best ideas happen on mountain trails, probably because no wireless connectivity exists to create distractions.</div>
-                </div>
 
-                <div class="interest-card fade-in">
-                    <div class="interest-emoji">🏙️</div>
-                    <div class="interest-title">Urban Exploration</div>
-                    <div class="interest-text">Walking through cities to understand their rhythm. Architecture tells stories that spreadsheets sometimes miss.</div>
-                </div>
+            <div class="interest-card">
+                <div class="interest-emoji">🏙️</div>
+                <div class="interest-title">Urban Exploration</div>
+                <div class="interest-text">Understanding urban dynamics through systematic exploration. Architecture and city planning reveal patterns that inform strategic thinking.</div>
+            </div>
 
-                <div class="interest-card fade-in">
-                    <div class="interest-emoji">✍️</div>
-                    <div class="interest-title">Reflective Writing</div>
-                    <div class="interest-text">Journaling thoughts, observations, and occasional existential questions. Writing clarifies thinking in ways conversation cannot.</div>
-                </div>
+            <div class="interest-card">
+                <div class="interest-emoji">✍️</div>
+                <div class="interest-title">Reflective Writing</div>
+                <div class="interest-text">Maintaining regular journaling practice for thought organization and synthesis. Writing clarifies thinking and enables pattern recognition.</div>
             </div>
         </div>
     </section>
 
     <section id="contact" class="contact-section">
-        <div class="container">
-            <div class="contact-grid">
-                <div>
-                    <div class="contact-info fade-in-left">
-                        <h2>Let's Connect</h2>
-                        <p>Whether you want to discuss strategy frameworks, explore consulting opportunities, or debate why most business models represent common sense dressed in consultant terminology, I am available for conversation.</p>
-                        <p>Open to opportunities in strategy consulting, product management, and project leadership roles where analytical thinking meets business execution.</p>
+        <div class="section-label">Professional Contact</div>
+        <h2 class="section-title">Connect for Strategic Dialogue</h2>
+        <p class="section-description">
+            Available for discussions regarding strategy consulting, product management, and project leadership opportunities where analytical thinking meets business execution.
+        </p>
+        <div class="contact-grid">
+            <div class="contact-methods">
+                <a href="mailto:saurabh.upadhyay1503@gmail.com" class="contact-link">
+                    <div class="contact-icon">📧</div>
+                    <div>
+                        <div class="contact-label">Email</div>
+                        <div class="contact-value">saurabh.upadhyay1503@gmail.com</div>
                     </div>
-                    <div class="contact-methods">
-                        <a href="mailto:saurabh.upadhyay1503@gmail.com" class="contact-link fade-in-left">
-                            <div class="contact-icon">📧</div>
-                            <div class="contact-details">
-                                <div class="contact-label">Email</div>
-                                <div class="contact-value">saurabh.upadhyay1503@gmail.com</div>
-                            </div>
-                        </a>
+                </a>
 
-                        <a href="https://www.linkedin.com/in/saurabh-upadhyay-srbh" target="_blank" class="contact-link fade-in-left">
-                            <div class="contact-icon">💼</div>
-                            <div class="contact-details">
-                                <div class="contact-label">LinkedIn</div>
-                                <div class="contact-value">Connect professionally</div>
-                            </div>
-                        </a>
-
-                        <a href="tel:+447818982971" class="contact-link fade-in-left">
-                            <div class="contact-icon">📱</div>
-                            <div class="contact-details">
-                                <div class="contact-label">Phone</div>
-                                <div class="contact-value">+44 7818982971</div>
-                            </div>
-                        </a>
+                <a href="https://www.linkedin.com/in/saurabh-upadhyay-srbh" target="_blank" class="contact-link">
+                    <div class="contact-icon">💼</div>
+                    <div>
+                        <div class="contact-label">LinkedIn</div>
+                        <div class="contact-value">Professional Profile</div>
                     </div>
-                </div>
+                </a>
 
-                <div class="contact-form-container fade-in-right">
-                    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-                        <div class="form-group">
-                            <label for="name">Your Name</label>
-                            <input type="text" id="name" name="name" required placeholder="John Doe">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="email">Your Email</label>
-                            <input type="email" id="email" name="email" required placeholder="john@example.com">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="message">Your Enquiry</label>
-                            <textarea id="message" name="message" required placeholder="Tell me about your project, opportunity, or question..."></textarea>
-                        </div>
-                        
-                        <button type="submit" class="submit-button">Send Message →</button>
-                    </form>
-                </div>
+                <a href="https://github.com/SaurabhUpa1503" target="_blank" class="contact-link">
+                    <div class="contact-icon">👨‍💻</div>
+                    <div>
+                        <div class="contact-label">GitHub</div>
+                        <div class="contact-value">Technical Portfolio</div>
+                    </div>
+                </a>
+
+                <a href="tel:+447818982971" class="contact-link">
+                    <div class="contact-icon">📱</div>
+                    <div>
+                        <div class="contact-label">Phone</div>
+                        <div class="contact-value">+44 7818982971</div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="contact-form">
+                <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required placeholder="John Smith">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required placeholder="john.smith@company.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Enquiry Details</label>
+                        <textarea id="message" name="message" required placeholder="Please describe your project requirements or opportunity..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-button">Submit Enquiry</button>
+                </form>
             </div>
         </div>
     </section>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2026 Saurabh Upadhyay. Built with strategic intent, not a template.</p>
-        </div>
+        <p>&copy; 2026 Saurabh Upadhyay. Professional portfolio developed with strategic intention.</p>
     </footer>
-
-    <script>
-        // Scroll Progress Bar
-        window.addEventListener('scroll', () => {
-            const scrollProgress = document.getElementById('scrollProgress');
-            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrolled = (window.scrollY / scrollHeight) * 100;
-            scrollProgress.style.width = scrolled + '%';
-        });
-
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            threshold: 0.15,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        // Observe all fade-in elements
-        document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Observe section titles for underline animation
-        document.querySelectorAll('.section-title').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Observe highlight items
-        document.querySelectorAll('.highlight-item').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-    </script>
 </body>
 </html>
