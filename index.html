@@ -6,18 +6,18 @@
     <title>Saurabh Upadhyay | Strategy & Project Management</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Serif:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --deloitte-green: #86BC25;
-            --deloitte-dark: #0D2C54;
-            --deloitte-blue: #00A3E0;
-            --deloitte-navy: #00205C;
-            --text-primary: #2C2C2C;
-            --text-secondary: #5F5F5F;
-            --bg-light: #FFFFFF;
-            --bg-grey: #F7F7F7;
-            --border-light: #E5E5E5;
+            --primary-dark: #0A0E27;
+            --secondary-dark: #151A30;
+            --accent-blue: #0088AA;
+            --accent-cyan: #00B4D8;
+            --text-light: #E8E8E8;
+            --text-muted: #9CA3AF;
+            --card-dark: #1A1F36;
+            --border-subtle: #2A2F45;
         }
 
         * {
@@ -31,14 +31,26 @@
         }
 
         body {
-            font-family: 'IBM Plex Sans', sans-serif;
-            background: var(--bg-light);
-            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            background: var(--primary-dark);
+            color: var(--text-light);
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        /* Hero Section with Network Visualization */
+        /* Smooth Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--deloitte-green), var(--accent-cyan));
+            z-index: 9999;
+            transition: width 0.1s ease;
+        }
+
+        /* Hero Section */
         .hero {
             min-height: 100vh;
             position: relative;
@@ -48,18 +60,19 @@
             overflow: hidden;
         }
 
-        /* Network Visualization Layers */
+        /* Network Visualization */
         .network-canvas {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            height: 65%;
+            height: 70%;
             background: 
-                radial-gradient(circle at 15% 85%, rgba(0, 119, 182, 0.3) 0%, transparent 30%),
-                radial-gradient(circle at 45% 90%, rgba(0, 180, 216, 0.25) 0%, transparent 35%),
-                radial-gradient(circle at 75% 88%, rgba(0, 136, 170, 0.28) 0%, transparent 32%);
+                radial-gradient(circle at 15% 85%, rgba(0, 136, 170, 0.35) 0%, transparent 35%),
+                radial-gradient(circle at 45% 90%, rgba(0, 180, 216, 0.28) 0%, transparent 38%),
+                radial-gradient(circle at 75% 88%, rgba(134, 188, 37, 0.15) 0%, transparent 35%);
             z-index: 1;
+            animation: networkPulse 8s ease-in-out infinite;
         }
 
         .network-lines {
@@ -67,18 +80,17 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 65%;
+            height: 70%;
             background-image: 
-                linear-gradient(28deg, transparent 47%, rgba(0, 119, 182, 0.5) 49.5%, rgba(0, 119, 182, 0.6) 50%, rgba(0, 119, 182, 0.5) 50.5%, transparent 53%),
-                linear-gradient(152deg, transparent 47%, rgba(0, 180, 216, 0.4) 49.5%, rgba(0, 180, 216, 0.5) 50%, rgba(0, 180, 216, 0.4) 50.5%, transparent 53%),
-                linear-gradient(78deg, transparent 48%, rgba(0, 136, 170, 0.35) 49.5%, rgba(0, 136, 170, 0.45) 50%, rgba(0, 136, 170, 0.35) 50.5%, transparent 52%),
-                linear-gradient(-38deg, transparent 48%, rgba(0, 180, 216, 0.3) 49.5%, rgba(0, 180, 216, 0.4) 50%, rgba(0, 180, 216, 0.3) 50.5%, transparent 52%),
-                linear-gradient(118deg, transparent 47%, rgba(0, 119, 182, 0.35) 49.5%, rgba(0, 119, 182, 0.45) 50%, rgba(0, 119, 182, 0.35) 50.5%, transparent 53%);
-            background-size: 700px 700px, 900px 900px, 550px 550px, 800px 800px, 720px 720px;
-            background-position: 12% 100%, 58% 100%, 84% 92%, 36% 98%, 68% 88%;
-            opacity: 0.85;
+                linear-gradient(28deg, transparent 47%, rgba(0, 136, 170, 0.6) 49.8%, rgba(0, 136, 170, 0.7) 50%, rgba(0, 136, 170, 0.6) 50.2%, transparent 53%),
+                linear-gradient(152deg, transparent 47%, rgba(0, 180, 216, 0.5) 49.8%, rgba(0, 180, 216, 0.6) 50%, rgba(0, 180, 216, 0.5) 50.2%, transparent 53%),
+                linear-gradient(78deg, transparent 48%, rgba(134, 188, 37, 0.25) 49.8%, rgba(134, 188, 37, 0.35) 50%, rgba(134, 188, 37, 0.25) 50.2%, transparent 52%),
+                linear-gradient(-35deg, transparent 48%, rgba(0, 180, 216, 0.4) 49.8%, rgba(0, 180, 216, 0.5) 50%, rgba(0, 180, 216, 0.4) 50.2%, transparent 52%);
+            background-size: 650px 650px, 850px 850px, 580px 580px, 750px 750px;
+            background-position: 10% 100%, 60% 100%, 85% 95%, 35% 98%;
+            opacity: 0.9;
             z-index: 2;
-            animation: networkFloat 10s ease-in-out infinite;
+            animation: networkFlow 12s ease-in-out infinite;
         }
 
         .network-nodes {
@@ -86,47 +98,50 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 65%;
+            height: 70%;
             z-index: 3;
         }
 
         .node {
             position: absolute;
-            width: 8px;
-            height: 8px;
-            background: rgba(0, 180, 216, 0.9);
+            width: 10px;
+            height: 10px;
+            background: rgba(0, 180, 216, 0.95);
             border-radius: 50%;
-            box-shadow: 0 0 20px rgba(0, 180, 216, 0.7), 0 0 40px rgba(0, 180, 216, 0.4);
-            animation: nodePulse 3.5s ease-in-out infinite;
+            box-shadow: 0 0 25px rgba(0, 180, 216, 0.8), 0 0 50px rgba(0, 180, 216, 0.4);
+            animation: nodePulse 4s ease-in-out infinite;
         }
 
-        .node:nth-child(1) { bottom: 12%; left: 10%; animation-delay: 0s; }
-        .node:nth-child(2) { bottom: 28%; left: 26%; width: 11px; height: 11px; animation-delay: 0.6s; }
-        .node:nth-child(3) { bottom: 8%; left: 43%; width: 9px; height: 9px; animation-delay: 1.1s; }
-        .node:nth-child(4) { bottom: 32%; left: 60%; width: 12px; height: 12px; animation-delay: 1.7s; }
-        .node:nth-child(5) { bottom: 16%; left: 76%; animation-delay: 2.2s; }
-        .node:nth-child(6) { bottom: 38%; left: 86%; width: 10px; height: 10px; animation-delay: 2.8s; }
-        .node:nth-child(7) { bottom: 6%; left: 34%; animation-delay: 0.9s; }
-        .node:nth-child(8) { bottom: 24%; left: 51%; width: 11px; height: 11px; animation-delay: 2s; }
+        .node:nth-child(1) { bottom: 15%; left: 8%; animation-delay: 0s; }
+        .node:nth-child(2) { bottom: 30%; left: 24%; width: 12px; height: 12px; animation-delay: 0.7s; }
+        .node:nth-child(3) { bottom: 10%; left: 42%; width: 9px; height: 9px; animation-delay: 1.4s; }
+        .node:nth-child(4) { bottom: 35%; left: 58%; width: 13px; height: 13px; animation-delay: 2.1s; }
+        .node:nth-child(5) { bottom: 18%; left: 74%; animation-delay: 2.8s; }
+        .node:nth-child(6) { bottom: 40%; left: 85%; width: 11px; height: 11px; animation-delay: 3.5s; }
 
-        @keyframes networkFloat {
+        @keyframes networkPulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes networkFlow {
             0%, 100% {
-                opacity: 0.75;
+                opacity: 0.85;
                 transform: translateY(0);
             }
             50% {
-                opacity: 0.95;
-                transform: translateY(-8px);
+                opacity: 1;
+                transform: translateY(-12px);
             }
         }
 
         @keyframes nodePulse {
             0%, 100% {
                 transform: scale(1);
-                opacity: 0.9;
+                opacity: 0.95;
             }
             50% {
-                transform: scale(1.4);
+                transform: scale(1.5);
                 opacity: 1;
             }
         }
@@ -136,111 +151,156 @@
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 80px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: center;
-            gap: 80px;
             position: relative;
-            z-index: 2;
+            z-index: 10;
         }
 
         .hero-text {
-            max-width: 600px;
+            max-width: 650px;
         }
 
         .hero-label {
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 2px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 3px;
             text-transform: uppercase;
             color: var(--deloitte-green);
-            margin-bottom: 24px;
+            margin-bottom: 28px;
             display: inline-block;
             opacity: 0;
             animation: fadeInUp 0.8s ease-out 0.2s forwards;
         }
 
         .hero-title {
-            font-family: 'IBM Plex Serif', serif;
-            font-size: 4.5rem;
-            font-weight: 700;
-            line-height: 1.1;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 5.5rem;
+            font-weight: 800;
+            line-height: 1.05;
             color: #FFFFFF;
-            margin-bottom: 32px;
+            margin-bottom: 36px;
             opacity: 0;
             animation: fadeInUp 0.8s ease-out 0.4s forwards;
-            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
         }
 
         .hero-title-highlight {
             color: var(--deloitte-green);
+            display: inline-block;
+            position: relative;
+        }
+
+        .hero-title-highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 4px;
+            background: var(--deloitte-green);
+            animation: underlineGrow 0.8s ease-out 1.2s forwards;
+        }
+
+        @keyframes underlineGrow {
+            to { width: 100%; }
         }
 
         .hero-subtitle {
-            font-size: 1.5rem;
+            font-size: 1.65rem;
             font-weight: 400;
             color: rgba(255, 255, 255, 0.95);
-            margin-bottom: 40px;
+            margin-bottom: 44px;
             line-height: 1.5;
             opacity: 0;
             animation: fadeInUp 0.8s ease-out 0.6s forwards;
-            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
         }
 
         .hero-description {
-            font-size: 1.05rem;
-            color: rgba(255, 255, 255, 0.85);
-            line-height: 1.8;
-            margin-bottom: 48px;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.85;
+            margin-bottom: 52px;
             opacity: 0;
             animation: fadeInUp 0.8s ease-out 0.8s forwards;
-            text-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
         }
 
         .hero-cta {
             display: flex;
-            gap: 20px;
+            gap: 24px;
             opacity: 0;
             animation: fadeInUp 0.8s ease-out 1s forwards;
         }
 
         .cta-primary {
-            padding: 16px 40px;
+            padding: 18px 48px;
             background: var(--deloitte-green);
-            color: white;
-            font-size: 1rem;
-            font-weight: 600;
+            color: #000000;
+            font-size: 1.05rem;
+            font-weight: 700;
             text-decoration: none;
-            border-radius: 0;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .cta-primary:hover::before {
+            left: 100%;
         }
 
         .cta-primary:hover {
-            background: var(--deloitte-navy);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 32, 92, 0.2);
+            background: #9DD129;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(134, 188, 37, 0.5);
         }
 
         .cta-secondary {
-            padding: 16px 40px;
+            padding: 18px 48px;
             background: transparent;
-            color: var(--deloitte-navy);
-            font-size: 1rem;
-            font-weight: 600;
+            color: #FFFFFF;
+            font-size: 1.05rem;
+            font-weight: 700;
             text-decoration: none;
-            border: 2px solid var(--deloitte-navy);
-            border-radius: 0;
-            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-secondary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: width 0.4s ease;
+            z-index: -1;
+        }
+
+        .cta-secondary:hover::before {
+            width: 100%;
         }
 
         .cta-secondary:hover {
-            background: var(--deloitte-navy);
-            color: white;
+            border-color: var(--deloitte-green);
+            color: var(--deloitte-green);
+            transform: translateY(-3px);
         }
 
-        /* Semi-Circle Image Treatment */
+        /* Semi-Circle Image - CORRECTED ORIENTATION */
         .hero-image-container {
             position: absolute;
             right: 0;
@@ -250,19 +310,21 @@
             height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: flex-start;
+            justify-content: flex-end;
+            padding-right: 0;
             overflow: hidden;
             opacity: 0;
             animation: fadeIn 1.2s ease-out 0.6s forwards;
+            z-index: 5;
         }
 
         .semicircle-wrapper {
             position: relative;
-            width: 120%;
-            height: 100%;
+            width: 100vh;
+            height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-end;
         }
 
         .hero-image {
@@ -270,13 +332,18 @@
             height: 100vh;
             object-fit: cover;
             border-radius: 50%;
-            clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%);
-            filter: grayscale(15%) brightness(1.05);
-            transition: all 0.6s ease;
+            /* CORRECTED: Flat edge on right, curve toward center */
+            clip-path: polygon(0% 0%, 50% 0%, 50% 100%, 0% 100%);
+            filter: brightness(1.08) contrast(1.12);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 
+                60px 0 120px rgba(0, 136, 170, 0.45),
+                100px 0 180px rgba(0, 180, 216, 0.35),
+                140px 0 240px rgba(134, 188, 37, 0.2);
         }
 
         .hero-image:hover {
-            filter: grayscale(0%) brightness(1.1);
+            filter: brightness(1.15) contrast(1.18);
             transform: scale(1.02);
         }
 
@@ -288,152 +355,284 @@
             width: 100vh;
             height: 100vh;
             border-radius: 50%;
-            border: 2px solid var(--deloitte-green);
-            clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%);
-            opacity: 0.4;
-            animation: pulseRotate 4s ease-in-out infinite;
+            border: 3px solid rgba(134, 188, 37, 0.5);
+            /* CORRECTED: Same clip path as image */
+            clip-path: polygon(0% 0%, 50% 0%, 50% 100%, 0% 100%);
+            opacity: 0.7;
+            animation: pulseAccent 5s ease-in-out infinite;
+            box-shadow: 
+                inset 30px 0 60px rgba(0, 136, 170, 0.3),
+                40px 0 80px rgba(0, 180, 216, 0.2);
         }
 
-        @keyframes pulseRotate {
-            0%, 100% { transform: translateY(-50%) scale(1); }
-            50% { transform: translateY(-50%) scale(1.02); }
+        @keyframes pulseAccent {
+            0%, 100% { 
+                opacity: 0.7;
+                transform: translateY(-50%) scale(1);
+            }
+            50% { 
+                opacity: 0.95;
+                transform: translateY(-50%) scale(1.03);
+            }
         }
 
-        /* Section Base Styles */
+        /* Sections - Darker, More Elegant */
         section {
-            padding: 120px 80px;
+            padding: 140px 80px;
             max-width: 1400px;
             margin: 0 auto;
+            position: relative;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+            opacity: 0.3;
         }
 
         .section-label {
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 2px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            color: var(--deloitte-blue);
-            margin-bottom: 16px;
+            color: var(--accent-cyan);
+            margin-bottom: 20px;
             display: inline-block;
+            position: relative;
+        }
+
+        .section-label::before {
+            content: '';
+            position: absolute;
+            left: -40px;
+            top: 50%;
+            width: 28px;
+            height: 2px;
+            background: var(--deloitte-green);
         }
 
         .section-title {
-            font-family: 'IBM Plex Serif', serif;
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--deloitte-navy);
-            margin-bottom: 24px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--text-light);
+            margin-bottom: 28px;
             line-height: 1.2;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .section-title.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .section-description {
-            font-size: 1.15rem;
-            color: var(--text-secondary);
-            line-height: 1.8;
-            margin-bottom: 60px;
-            max-width: 800px;
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            line-height: 1.85;
+            margin-bottom: 70px;
+            max-width: 850px;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s;
+        }
+
+        .section-description.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* About Section */
+        .about-section {
+            background: var(--secondary-dark);
+        }
+
         .about-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 80px;
-            margin-top: 60px;
+            grid-template-columns: 1.8fr 1fr;
+            gap: 100px;
+            margin-top: 70px;
         }
 
         .about-content {
-            font-size: 1.05rem;
-            line-height: 1.9;
-            color: var(--text-primary);
+            font-size: 1.1rem;
+            line-height: 1.95;
+            color: var(--text-muted);
         }
 
         .about-content p {
-            margin-bottom: 28px;
+            margin-bottom: 32px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
+        .about-content p.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .about-content p:nth-child(1) { transition-delay: 0.1s; }
+        .about-content p:nth-child(2) { transition-delay: 0.2s; }
+        .about-content p:nth-child(3) { transition-delay: 0.3s; }
+
         .about-stats {
-            background: var(--deloitte-navy);
-            padding: 60px 40px;
-            color: white;
+            background: linear-gradient(135deg, var(--card-dark) 0%, #0D1121 100%);
+            padding: 70px 50px;
+            border: 1px solid var(--border-subtle);
+            position: sticky;
+            top: 40px;
+            transition: all 0.4s ease;
+        }
+
+        .about-stats:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            border-color: var(--deloitte-green);
         }
 
         .stat-item {
-            margin-bottom: 48px;
+            margin-bottom: 52px;
             border-left: 4px solid var(--deloitte-green);
-            padding-left: 24px;
+            padding-left: 28px;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
+
+        .stat-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .stat-item:nth-child(1) { transition-delay: 0.1s; }
+        .stat-item:nth-child(2) { transition-delay: 0.2s; }
+        .stat-item:nth-child(3) { transition-delay: 0.3s; }
+        .stat-item:nth-child(4) { transition-delay: 0.4s; }
 
         .stat-item:last-child {
             margin-bottom: 0;
         }
 
         .stat-number {
-            font-family: 'IBM Plex Serif', serif;
-            font-size: 3.5rem;
-            font-weight: 700;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4rem;
+            font-weight: 800;
             color: var(--deloitte-green);
             line-height: 1;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover .stat-number {
+            transform: scale(1.12);
         }
 
         .stat-label {
-            font-size: 1rem;
-            color: white;
+            font-size: 1.05rem;
+            color: var(--text-light);
             line-height: 1.5;
         }
 
         /* Projects Section */
         .projects-section {
-            background: var(--bg-grey);
+            background: var(--primary-dark);
         }
 
         .project-card {
-            background: var(--bg-light);
-            padding: 60px;
-            margin-bottom: 40px;
-            border-left: 6px solid var(--deloitte-green);
-            transition: all 0.3s ease;
+            background: var(--card-dark);
+            padding: 70px;
+            margin-bottom: 48px;
+            border: 1px solid var(--border-subtle);
+            border-left: 5px solid var(--deloitte-green);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .project-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(134, 188, 37, 0.05), transparent);
+            transition: left 0.8s;
+        }
+
+        .project-card:hover::before {
+            left: 100%;
         }
 
         .project-card:hover {
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
-            transform: translateX(8px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            transform: translateX(12px) translateY(-4px);
+            border-left-width: 8px;
         }
 
         .project-header {
             display: flex;
             justify-content: space-between;
             align-items: start;
-            margin-bottom: 28px;
+            margin-bottom: 32px;
         }
 
         .project-title {
-            font-family: 'IBM Plex Serif', serif;
-            font-size: 1.75rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
             font-weight: 700;
-            color: var(--deloitte-navy);
-            margin-bottom: 12px;
+            color: var(--text-light);
+            margin-bottom: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .project-card:hover .project-title {
+            color: var(--deloitte-green);
         }
 
         .project-client {
-            font-size: 1.15rem;
-            color: var(--deloitte-blue);
+            font-size: 1.2rem;
+            color: var(--accent-cyan);
             font-weight: 600;
         }
 
         .project-date {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-            background: var(--bg-grey);
-            padding: 8px 20px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            background: var(--secondary-dark);
+            padding: 10px 24px;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover .project-date {
+            background: var(--deloitte-green);
+            color: #000000;
+            border-color: var(--deloitte-green);
         }
 
         .project-description {
-            font-size: 1.05rem;
-            color: var(--text-secondary);
-            line-height: 1.8;
-            margin-bottom: 28px;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            line-height: 1.85;
+            margin-bottom: 32px;
         }
 
         .project-achievements {
@@ -441,28 +640,43 @@
         }
 
         .project-achievements li {
-            padding-left: 28px;
-            margin-bottom: 16px;
+            padding-left: 32px;
+            margin-bottom: 18px;
             position: relative;
-            line-height: 1.8;
-            color: var(--text-primary);
+            line-height: 1.85;
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+        }
+
+        .project-achievements li:hover {
+            transform: translateX(8px);
+            color: var(--text-light);
         }
 
         .project-achievements li::before {
             content: '';
             position: absolute;
             left: 0;
-            top: 10px;
-            width: 12px;
+            top: 12px;
+            width: 14px;
             height: 2px;
             background: var(--deloitte-green);
+            transition: width 0.3s ease;
         }
 
-        /* Experience Timeline */
+        .project-achievements li:hover::before {
+            width: 20px;
+        }
+
+        /* Timeline */
+        .experience-section {
+            background: var(--secondary-dark);
+        }
+
         .timeline {
             position: relative;
-            padding-left: 60px;
-            margin-top: 60px;
+            padding-left: 70px;
+            margin-top: 70px;
         }
 
         .timeline::before {
@@ -472,61 +686,88 @@
             top: 0;
             bottom: 0;
             width: 4px;
-            background: var(--deloitte-green);
+            background: linear-gradient(180deg, var(--deloitte-green) 0%, var(--accent-cyan) 100%);
         }
 
         .timeline-item {
             position: relative;
-            margin-bottom: 60px;
-            padding: 40px;
-            background: var(--bg-light);
-            border: 1px solid var(--border-light);
-            transition: all 0.3s ease;
+            margin-bottom: 70px;
+            padding: 60px;
+            background: var(--card-dark);
+            border: 1px solid var(--border-subtle);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateX(0);
         }
 
         .timeline-item:hover {
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            transform: translateX(15px) scale(1.01);
+            border-color: var(--deloitte-green);
         }
 
         .timeline-item::before {
             content: '';
             position: absolute;
-            left: -68px;
-            top: 50px;
-            width: 16px;
-            height: 16px;
+            left: -80px;
+            top: 70px;
+            width: 18px;
+            height: 18px;
             background: var(--deloitte-green);
-            border: 4px solid var(--bg-light);
+            border: 5px solid var(--primary-dark);
             border-radius: 50%;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 0 0 rgba(134, 188, 37, 0.4);
+        }
+
+        .timeline-item:hover::before {
+            width: 26px;
+            height: 26px;
+            left: -84px;
+            box-shadow: 0 0 0 10px rgba(134, 188, 37, 0.2);
         }
 
         .timeline-role {
-            font-family: 'IBM Plex Serif', serif;
-            font-size: 1.75rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
             font-weight: 700;
-            color: var(--deloitte-navy);
-            margin-bottom: 8px;
+            color: var(--text-light);
+            margin-bottom: 12px;
+            transition: color 0.3s ease;
+        }
+
+        .timeline-item:hover .timeline-role {
+            color: var(--deloitte-green);
         }
 
         .timeline-company {
-            font-size: 1.15rem;
-            color: var(--deloitte-blue);
+            font-size: 1.25rem;
+            color: var(--accent-cyan);
             font-weight: 600;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
 
         .timeline-period {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-            margin-bottom: 24px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 28px;
+            padding: 8px 20px;
+            background: var(--secondary-dark);
+            border: 1px solid var(--border-subtle);
+            display: inline-block;
         }
 
         .timeline-description {
-            font-size: 1.05rem;
-            color: var(--text-secondary);
-            line-height: 1.8;
-            margin-bottom: 24px;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            line-height: 1.85;
+            margin-bottom: 28px;
         }
 
         .timeline-achievements {
@@ -534,293 +775,447 @@
         }
 
         .timeline-achievements li {
-            padding-left: 28px;
-            margin-bottom: 16px;
+            padding-left: 32px;
+            margin-bottom: 18px;
             position: relative;
-            line-height: 1.8;
+            line-height: 1.85;
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-achievements li:hover {
+            transform: translateX(8px);
+            color: var(--text-light);
         }
 
         .timeline-achievements li::before {
             content: '';
             position: absolute;
             left: 0;
-            top: 10px;
-            width: 12px;
+            top: 12px;
+            width: 14px;
             height: 2px;
             background: var(--deloitte-green);
+            transition: width 0.3s ease;
+        }
+
+        .timeline-achievements li:hover::before {
+            width: 20px;
         }
 
         /* Skills Section */
+        .skills-section {
+            background: var(--primary-dark);
+        }
+
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            margin-top: 60px;
+            gap: 48px;
+            margin-top: 70px;
         }
 
         .skill-category {
-            background: var(--bg-light);
-            padding: 40px;
-            border: 1px solid var(--border-light);
-            transition: all 0.3s ease;
+            background: var(--card-dark);
+            padding: 50px;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .skill-category.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .skill-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background: var(--deloitte-green);
+            transition: height 0.5s ease;
+        }
+
+        .skill-category:hover::before {
+            height: 100%;
         }
 
         .skill-category:hover {
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+            transform: translateY(-12px);
             border-color: var(--deloitte-green);
         }
 
         .skill-category h3 {
-            font-family: 'IBM Plex Serif', serif;
-            font-size: 1.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.75rem;
             font-weight: 700;
-            color: var(--deloitte-navy);
-            margin-bottom: 28px;
+            color: var(--text-light);
+            margin-bottom: 32px;
         }
 
         .skill-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 14px;
         }
 
         .skill-tag {
-            padding: 10px 20px;
-            background: var(--bg-grey);
-            color: var(--text-primary);
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
+            padding: 12px 24px;
+            background: var(--secondary-dark);
+            color: var(--text-light);
+            font-size: 0.95rem;
+            font-weight: 600;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: default;
         }
 
         .skill-tag:hover {
-            background: var(--deloitte-navy);
-            color: white;
+            background: var(--deloitte-green);
+            color: #000000;
+            border-color: var(--deloitte-green);
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px rgba(134, 188, 37, 0.4);
         }
 
-        /* Achievements Section */
+        /* Achievements */
+        .achievements-section {
+            background: var(--secondary-dark);
+        }
+
         .achievements-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            margin-top: 60px;
+            gap: 48px;
+            margin-top: 70px;
         }
 
         .achievement-card {
-            background: var(--bg-light);
-            padding: 40px;
-            border: 1px solid var(--border-light);
+            background: var(--card-dark);
+            padding: 50px;
+            border: 1px solid var(--border-subtle);
             text-align: center;
-            transition: all 0.3s ease;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        .achievement-card.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .achievement-card::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(134, 188, 37, 0.15) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+            border-radius: 50%;
+        }
+
+        .achievement-card:hover::before {
+            width: 400px;
+            height: 400px;
         }
 
         .achievement-card:hover {
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+            transform: translateY(-15px) scale(1.03);
             border-color: var(--deloitte-green);
         }
 
         .achievement-icon {
-            font-size: 3rem;
-            margin-bottom: 24px;
+            font-size: 3.5rem;
+            margin-bottom: 28px;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .achievement-card:hover .achievement-icon {
+            transform: scale(1.3) rotate(10deg);
         }
 
         .achievement-title {
-            font-size: 1.15rem;
+            font-size: 1.25rem;
             font-weight: 700;
-            color: var(--deloitte-navy);
-            margin-bottom: 12px;
+            color: var(--text-light);
+            margin-bottom: 16px;
             line-height: 1.4;
+            position: relative;
+            z-index: 1;
         }
 
         .achievement-subtitle {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
+            font-size: 1rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
         }
 
-        /* Interests Section */
+        /* Interests */
         .interests-section {
-            background: var(--deloitte-navy);
-            color: white;
-        }
-
-        .interests-section .section-label {
-            color: var(--deloitte-green);
-        }
-
-        .interests-section .section-title {
-            color: white;
-        }
-
-        .interests-section .section-description {
-            color: rgba(255, 255, 255, 0.8);
+            background: linear-gradient(135deg, #0A0E27 0%, #151A30 100%);
         }
 
         .interests-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            margin-top: 60px;
+            gap: 48px;
+            margin-top: 70px;
         }
 
         .interest-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 50px 40px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: linear-gradient(135deg, var(--card-dark) 0%, #121629 100%);
+            padding: 60px 50px;
+            border: 1px solid var(--border-subtle);
             text-align: center;
-            transition: all 0.3s ease;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .interest-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .interest-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(134, 188, 37, 0.1), transparent);
+            transition: left 0.8s;
+        }
+
+        .interest-card:hover::after {
+            left: 100%;
         }
 
         .interest-card:hover {
-            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-18px) scale(1.05);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.5);
             border-color: var(--deloitte-green);
         }
 
         .interest-emoji {
-            font-size: 3rem;
-            margin-bottom: 24px;
+            font-size: 3.5rem;
+            margin-bottom: 28px;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .interest-card:hover .interest-emoji {
+            transform: scale(1.3) rotate(-8deg);
         }
 
         .interest-title {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
+            color: var(--text-light);
         }
 
         .interest-text {
-            font-size: 1rem;
-            opacity: 0.9;
-            line-height: 1.7;
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            line-height: 1.8;
         }
 
-        /* Contact Section */
+        /* Contact */
         .contact-section {
-            background: var(--bg-grey);
+            background: var(--card-dark);
         }
 
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            margin-top: 60px;
+            gap: 100px;
+            margin-top: 70px;
         }
 
         .contact-methods {
             display: flex;
             flex-direction: column;
-            gap: 24px;
+            gap: 28px;
         }
 
         .contact-link {
             display: flex;
             align-items: center;
-            gap: 24px;
-            padding: 28px;
-            background: var(--bg-light);
+            gap: 28px;
+            padding: 32px;
+            background: var(--secondary-dark);
             text-decoration: none;
-            color: var(--text-primary);
-            border: 1px solid var(--border-light);
-            transition: all 0.3s ease;
+            color: var(--text-light);
+            border: 1px solid var(--border-subtle);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(134, 188, 37, 0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .contact-link:hover::before {
+            left: 100%;
         }
 
         .contact-link:hover {
             border-color: var(--deloitte-green);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+            transform: translateX(10px);
         }
 
         .contact-icon {
-            font-size: 2rem;
+            font-size: 2.2rem;
+            transition: transform 0.4s ease;
+        }
+
+        .contact-link:hover .contact-icon {
+            transform: scale(1.25) rotate(8deg);
         }
 
         .contact-label {
             font-size: 0.85rem;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-secondary);
-            margin-bottom: 4px;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
         }
 
         .contact-value {
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            color: var(--deloitte-navy);
+            color: var(--text-light);
         }
 
-        /* Contact Form */
         .contact-form {
-            background: var(--bg-light);
-            padding: 50px;
-            border: 1px solid var(--border-light);
+            background: var(--secondary-dark);
+            padding: 60px;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.4s ease;
+        }
+
+        .contact-form:hover {
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+            border-color: var(--deloitte-green);
         }
 
         .form-group {
-            margin-bottom: 28px;
+            margin-bottom: 32px;
         }
 
         .form-group label {
             display: block;
-            font-weight: 600;
-            color: var(--deloitte-navy);
-            margin-bottom: 12px;
-            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 14px;
+            font-size: 1rem;
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 16px;
-            border: 2px solid var(--border-light);
-            font-family: 'IBM Plex Sans', sans-serif;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            background: var(--bg-light);
+            padding: 18px;
+            border: 2px solid var(--border-subtle);
+            font-family: 'Inter', sans-serif;
+            font-size: 1.05rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: var(--card-dark);
+            color: var(--text-light);
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
             border-color: var(--deloitte-green);
+            box-shadow: 0 0 0 4px rgba(134, 188, 37, 0.15);
+            transform: translateY(-2px);
         }
 
         .form-group textarea {
             resize: vertical;
-            min-height: 150px;
+            min-height: 170px;
         }
 
         .submit-button {
             width: 100%;
-            padding: 18px;
+            padding: 20px;
             background: var(--deloitte-green);
-            color: white;
+            color: #000000;
             border: none;
-            font-size: 1.05rem;
-            font-weight: 600;
+            font-size: 1.1rem;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .submit-button:hover::before {
+            left: 100%;
         }
 
         .submit-button:hover {
-            background: var(--deloitte-navy);
+            background: #9DD129;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 35px rgba(134, 188, 37, 0.5);
         }
 
         /* Footer */
         footer {
-            background: var(--deloitte-navy);
-            color: white;
+            background: #000000;
+            color: var(--text-muted);
             text-align: center;
-            padding: 60px 80px;
-        }
-
-        footer p {
-            opacity: 0.8;
+            padding: 70px 80px;
+            border-top: 1px solid var(--border-subtle);
         }
 
         /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(40px);
             }
             to {
                 opacity: 1;
@@ -833,18 +1228,18 @@
             to { opacity: 1; }
         }
 
-        /* Responsive Design */
+        /* Responsive */
         @media (max-width: 1200px) {
             .hero-content-wrapper {
                 padding: 0 40px;
             }
 
             .hero-title {
-                font-size: 3.5rem;
+                font-size: 4rem;
             }
 
             section {
-                padding: 80px 40px;
+                padding: 100px 40px;
             }
 
             .about-grid {
@@ -865,19 +1260,15 @@
         @media (max-width: 768px) {
             .hero {
                 min-height: auto;
-                padding: 60px 0;
-            }
-
-            .hero-content-wrapper {
-                grid-template-columns: 1fr;
-                padding: 0 24px;
+                padding: 80px 0;
             }
 
             .hero-image-container {
                 position: static;
                 width: 100%;
                 height: 400px;
-                margin-top: 40px;
+                margin-top: 50px;
+                justify-content: center;
             }
 
             .semicircle-wrapper {
@@ -896,15 +1287,15 @@
             }
 
             .hero-title {
-                font-size: 2.5rem;
+                font-size: 3rem;
             }
 
             section {
-                padding: 60px 24px;
+                padding: 70px 24px;
             }
 
             .section-title {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
 
             .skills-grid,
@@ -914,22 +1305,22 @@
             }
 
             .timeline {
-                padding-left: 40px;
+                padding-left: 45px;
             }
 
             .timeline-item::before {
-                left: -48px;
+                left: -55px;
             }
         }
     </style>
 </head>
 <body>
+    <div class="scroll-progress" id="scrollProgress"></div>
+
     <section class="hero">
         <div class="network-canvas"></div>
         <div class="network-lines"></div>
         <div class="network-nodes">
-            <div class="node"></div>
-            <div class="node"></div>
             <div class="node"></div>
             <div class="node"></div>
             <div class="node"></div>
@@ -964,7 +1355,7 @@
         </div>
     </section>
 
-    <section id="about">
+    <section id="about" class="about-section">
         <div class="section-label">Introduction</div>
         <h2 class="section-title">Building Strategies That Scale</h2>
         <p class="section-description">
@@ -975,7 +1366,6 @@
                 <p>Professional experience spans business strategy, project management, and organizational transformation across multiple sectors. At Susamridh Nidhi Bank, led strategic growth initiatives that expanded financial inclusion through structured market segmentation and coordinated channel deployment, delivering forty-eight percent customer acquisition growth within two quarters.</p>
                 <p>Prior experience at Wipro involved orchestrating complex research and development projects for autonomous vehicle programs, managing requirements and stakeholder communications across fifty enterprise clients while achieving complete project adoption across global accounts. Technical background in electronics and communication engineering provides foundation for systematic problem-solving and analytical thinking.</p>
                 <p>Currently pursuing MBA at University of Edinburgh Business School while executing consulting engagements for clients including NatWest Group, Streets Ahead, and Predictiva. Projects focus on strategic positioning, market entry frameworks, and evidence-based recommendations for organizational transformation.</p>
-                <p>Certified by Microsoft for Power BI and Azure fundamentals, and by Google for Analytics. Professional approach combines technical competence with strategic thinking, enabling translation of complex challenges into executable solutions that deliver measurable business outcomes.</p>
             </div>
             <div class="about-stats">
                 <div class="stat-item">
@@ -1063,7 +1453,7 @@
         </div>
     </section>
 
-    <section id="experience">
+    <section id="experience" class="experience-section">
         <div class="section-label">Professional Experience</div>
         <h2 class="section-title">Career Progression</h2>
         <p class="section-description">
@@ -1132,7 +1522,7 @@
         </div>
     </section>
 
-    <section id="skills">
+    <section id="skills" class="skills-section">
         <div class="section-label">Capabilities</div>
         <h2 class="section-title">Core Competencies</h2>
         <p class="section-description">
@@ -1180,7 +1570,7 @@
         </div>
     </section>
 
-    <section id="achievements">
+    <section id="achievements" class="achievements-section">
         <div class="section-label">Credentials</div>
         <h2 class="section-title">Education & Certifications</h2>
         <p class="section-description">
@@ -1319,5 +1709,48 @@
     <footer>
         <p>&copy; 2026 Saurabh Upadhyay. Professional portfolio developed with strategic intention.</p>
     </footer>
+
+    <script>
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const scrollProgress = document.getElementById('scrollProgress');
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrolled = (window.scrollY / scrollHeight) * 100;
+            scrollProgress.style.width = scrolled + '%';
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -80px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.section-title, .section-description, .about-content p, .stat-item, .project-card, .timeline-item, .skill-category, .achievement-card, .interest-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
